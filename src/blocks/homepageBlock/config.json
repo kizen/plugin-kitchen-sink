@@ -1,0 +1,11 @@
+{
+  "name": "Homepage Block",
+  "api_name": "homepage_block",
+  "min_w": 3,
+  "max_w": 12,
+  "min_h": 3,
+  "max_h": 8,
+  "recommended_height": 240,
+  "types": ["homepages"],
+  "when": "Boolean({{config.enableBlocks}})"
+}

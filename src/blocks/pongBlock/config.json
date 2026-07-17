@@ -1,0 +1,10 @@
+{
+  "name": "Pong Block",
+  "api_name": "pong_block",
+  "min_w": 2,
+  "max_w": 6,
+  "min_h": 3,
+  "max_h": 8,
+  "recommended_height": 220,
+  "types": ["dashboards", "homepages", "charts", "records"]
+}

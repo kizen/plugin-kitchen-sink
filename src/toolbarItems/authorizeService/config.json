@@ -1,0 +1,6 @@
+{
+  "api_name": "authorize_service",
+  "label": "Authorize Google",
+  "icon": "key",
+  "color": "#dc2626"
+}

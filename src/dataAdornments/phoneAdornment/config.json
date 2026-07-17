@@ -1,0 +1,7 @@
+{
+  "icon": "phone",
+  "color": "blue",
+  "tooltip": "Phone Field Actions",
+  "field_type": "phonenumber",
+  "when": "Boolean({{config.enableAdornments}})"
+}

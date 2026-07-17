@@ -1,0 +1,222 @@
+{
+  "services": [
+    {
+      "api_name": "google_business",
+      "required": false,
+      "prerequisite": true
+    }
+  ],
+  "actions": [
+    "dad_joke_writeback",
+    "failure_modes_demo",
+    "perform_action_demo"
+  ],
+  "fields": [
+    {
+      "type": "description",
+      "key": "assistantIntro",
+      "content": "This assistant demonstrates **every setup-assistant field type**. The values you save here become the plugin's install config: scripts read them as `this.config.<key>`, and artifact configs can gate themselves with `\"when\": \"Boolean({{config.<key>}})\"` conditions. Description fields like this one support **markdown**."
+    },
+    {
+      "type": "container",
+      "columns": 2,
+      "label": "Feature Toggles",
+      "key": "featureToggles",
+      "fields": [
+        {
+          "type": "boolean",
+          "label": "Enable Floating Frames",
+          "key": "enableFloatingFrames",
+          "default": true,
+          "tooltip": "Reserved for the floating-frame surfaces of this plugin."
+        },
+        {
+          "type": "boolean",
+          "label": "Enable Data Adornments",
+          "key": "enableAdornments",
+          "default": true,
+          "tooltip": "Reserved for the data-adornment surfaces of this plugin."
+        },
+        {
+          "type": "boolean",
+          "label": "Enable Object Settings Item",
+          "key": "enableObjectSettingsItem",
+          "default": true,
+          "tooltip": "Reserved for the object-settings surface of this plugin."
+        },
+        {
+          "type": "boolean",
+          "label": "Enable Context Dump Toolbar Item",
+          "key": "enableContextDump",
+          "default": true,
+          "tooltip": "Turn this off and the Context Dump toolbar item disappears — its config.json has a when-condition on this value."
+        },
+        {
+          "type": "boolean",
+          "label": "Enable Blocks",
+          "key": "enableBlocks",
+          "default": true,
+          "tooltip": "Turn this off to hide the Dashboard and Homepage blocks from their pickers — both have a when-condition on this value. The Chart Group and Record blocks omit when, so they stay available."
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "key": "contextDumpHiddenNote",
+      "content": "<p style=\"color: #b45309;\">The <strong>Context Dump</strong> toolbar item is now hidden. This note is itself a demo: descriptions support HTML too, and any field can carry a <code>when</code> condition over other fields' values.</p>",
+      "when": "{{enableContextDump}} === false"
+    },
+    {
+      "type": "container",
+      "columns": 2,
+      "label": "Basic Inputs",
+      "key": "basicInputs",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Context Value",
+          "key": "contextValue",
+          "required": true,
+          "default": "kitchen-sink-demo",
+          "validation_pattern": "^[a-z0-9-]+$",
+          "tooltip": "A demo string scripts read back as this.config.contextValue. Lowercase letters, digits, and dashes only (validation_pattern)."
+        },
+        {
+          "type": "number",
+          "label": "Demo Number",
+          "key": "demoNumber",
+          "required": false,
+          "tooltip": "An optional number input. Left blank, the key is simply absent from the saved config."
+        },
+        {
+          "type": "select",
+          "label": "Demo Choice",
+          "key": "demoChoice",
+          "required": false,
+          "placeholder": "Pick one",
+          "options": [
+            { "label": "Alpha", "value": "alpha" },
+            { "label": "Beta", "value": "beta" },
+            { "label": "Gamma", "value": "gamma" }
+          ]
+        },
+        {
+          "type": "select",
+          "label": "Demo Multi-Choice",
+          "key": "demoMultiChoice",
+          "allow_multiple": true,
+          "placeholder": "Pick any number",
+          "options": [
+            { "label": "One", "value": "one" },
+            { "label": "Two", "value": "two" },
+            { "label": "Three", "value": "three" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "boolean",
+      "label": "Configure a Demo Object?",
+      "key": "configureDemoObject",
+      "default": false,
+      "tooltip": "Unlocks the object and field pickers below — they need an object to pick fields from."
+    },
+    {
+      "type": "custom_object",
+      "label": "Demo Object",
+      "key": "demoObjectId",
+      "required": true,
+      "when": "{{configureDemoObject}} === true",
+      "match_hint": "client_client",
+      "tooltip": "A Kizen object picker. match_hint pre-selects an object whose api_name matches, when one exists."
+    },
+    {
+      "type": "container",
+      "columns": 2,
+      "label": "Field Pickers",
+      "key": "fieldPickers",
+      "when": "{{configureDemoObject}} === true",
+      "fields": [
+        {
+          "type": "field",
+          "label": "Demo Name Field",
+          "key": "demoNameField",
+          "required": false,
+          "match_hint": "name",
+          "object_id": "{{demoObjectId}}",
+          "tooltip": "A single field picker, scoped to the demo object chosen above via object_id templating."
+        },
+        {
+          "type": "field",
+          "label": "Demo Fields (multi)",
+          "key": "demoFields",
+          "required": false,
+          "allow_multiple": true,
+          "object_id": "{{demoObjectId}}"
+        }
+      ]
+    },
+    {
+      "type": "container",
+      "columns": 2,
+      "label": "Google Calendar (async selects)",
+      "key": "googleCalendarSection",
+      "fields": [
+        {
+          "type": "description",
+          "key": "asyncSelectsIntro",
+          "content": "These two selects fetch their options live through the `google_business` service proxy — authorize that service (the prerequisite step at the top of this assistant) before using them. The calendar select auto-picks when exactly one calendar comes back (`autoSelect`); the events select re-fetches whenever the calendar changes (`dependencies`)."
+        },
+        {
+          "type": "select",
+          "label": "Google Calendar",
+          "key": "googleCalendar",
+          "required": false,
+          "autoSelect": true,
+          "tooltip": "Options come from setupAssistant/googleCalendar/getFetchUrl.js + optionMapper.js."
+        },
+        {
+          "type": "select",
+          "label": "Calendar Events",
+          "key": "googleCalendarEvents",
+          "required": false,
+          "allow_multiple": true,
+          "dependencies": ["googleCalendar"],
+          "tooltip": "Re-fetches when the calendar above changes. Falls back to the primary calendar when none is picked."
+        }
+      ]
+    },
+    {
+      "type": "container",
+      "columns": 3,
+      "label": "Static Content",
+      "key": "staticContent",
+      "fields": [
+        {
+          "type": "image",
+          "key": "demoImage",
+          "src": "https://placehold.co/240x80/4f46e5/ffffff?text=Kitchen+Sink",
+          "title": "Kitchen Sink demo image",
+          "width": 240,
+          "link": {
+            "text": "Kizen",
+            "href": "https://kizen.com"
+          }
+        },
+        {
+          "type": "qr",
+          "key": "demoQr",
+          "value": "/mobile-setup",
+          "include": ["email", "business_id"],
+          "size": 160
+        },
+        {
+          "type": "link",
+          "key": "demoLink",
+          "text": "Kizen Documentation",
+          "href": "https://docs.kizen.com"
+        }
+      ]
+    }
+  ]
+}

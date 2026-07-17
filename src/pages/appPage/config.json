@@ -1,0 +1,7 @@
+{
+  "name": "Kitchen Sink Page",
+  "api_name": "app_page",
+  "is_toolbar_item": true,
+  "toolbar_icon": "globe",
+  "toolbar_color": "#0ea5e9"
+}

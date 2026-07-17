@@ -1,0 +1,76 @@
+/* Kitchen Sink App · Block · Chart Group Block · styles */
+
+/* Engine-scoped (@scope) at inject time - write plain selectors. Each block ships its own
+ * styles.css; there is no cross-block shared stylesheet.
+ */
+
+.ks-block {
+  /* Fill the resizable dashlet cell instead of sizing to content — the host drops this markup
+   * into a full-width/height, overflow-auto container, so height:100% + border-box makes the
+   * block track the grid cell as the admin resizes it. */
+  height: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.ks-block__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ks-block__badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.ks-block__title {
+  font-weight: 600;
+}
+
+.ks-block__desc {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+  color: #cbd5e1;
+}
+
+.ks-block__desc code {
+  background: rgba(148, 163, 184, 0.2);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.ks-block__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ks-block__btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.ks-block__btn:hover {
+  background: #7dd3fc;
+}

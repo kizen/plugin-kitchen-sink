@@ -1,0 +1,7 @@
+{
+  "api_name": "context_dump",
+  "label": "Context Dump",
+  "icon": "list-tree",
+  "color": "#059669",
+  "when": "Boolean({{config.enableContextDump}})"
+}

@@ -1,0 +1,125 @@
+/* Kitchen Sink App · View · Frameless View · styles */
+
+/* The view supplies all of its own chrome: a header,
+   scrollable body, and button footer, laid out as a full-height column. */
+
+* {
+  box-sizing: border-box;
+}
+
+.flv-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 16px 0;
+}
+
+.flv-header {
+  padding: 0 20px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.flv-title {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  color: #0f172a;
+}
+
+.flv-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.flv-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.flv-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.flv-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.flv-input {
+  font: inherit;
+  font-size: 14px;
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #0f172a;
+  background: #f9fafb;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+  width: 100%;
+}
+
+.flv-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background: #ffffff;
+}
+
+.flv-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.flv-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 20px 0;
+  border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.flv-btn {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.flv-btn--cancel {
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.flv-btn--cancel:hover {
+  background: #f8fafc;
+}
+
+.flv-btn--submit {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.flv-btn--submit:hover {
+  background: #4338ca;
+}

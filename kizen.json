@@ -1,0 +1,95 @@
+{
+  "name": "Kitchen Sink",
+  "version": "0.0.1",
+  "published": true,
+  "api_name": "kitchen_sink",
+  "external_link": "https://developer.kizen.com",
+  "description": "Exercises every surface the Kizen plugin engine supports: actions, Python automation steps, floating frames, pages, blocks, toolbar items, data adornments, object settings items, calendar sources, route scripts, views, and both setup assistants.\n\nBuilt for two audiences. QA installs it to smoke-test engine changes across every surface, including deliberate failure paths. External developers read it as a working, commented reference for each capability.\n\nInstallation requires the developer program entitlement.",
+  "entry": "src/",
+  "engine": "1.0.0",
+  "release_notes_directory": "releaseNotes/",
+  "release_branches": ["main"],
+  "release_environments": ["dev"],
+  "required_entitlement": "developer_program_member",
+  "developer_business_id": "22cb3879-46f8-4233-94ac-0f0fc2f4b9e2",
+  "config_template": {},
+  "base_config": {
+    "secrets": ["api_key"]
+  },
+  "services": [
+    {
+      "service_name": "google_user",
+      "display_name": "Google (per user)",
+      "auth_type": "oauth",
+      "auth_level": "user",
+      "required_entitlement": null,
+      "base_service_url": "https://www.googleapis.com",
+      "auth_credentials": {
+        "client_id": {
+          "encrypted": true,
+          "value": "eyJ2IjoxLCJhbGciOiJSU0EtT0FFUC0yNTYrQTI1NkdDTSIsImsiOiJCb1l3UnR6TU5EMkw4RXlSNXV5QVhWTE94VEgwaFVRZnNJaEE2QVU2OGVEWVhZejd6NGh0RWNTeFdxbDlZa21LR2FzQlV1SUtYcW1UMEl4TUlvY2dCSzBLclNGbnp4VytISUEveEZjS25kREhiWFNFT20za2hKRVNjTkd0aGhQMUV0SkJ3Y1VMZ1NIbURQWnhyZjV4YnRYaHRMTklUTEFmOXNKTHAvZUZrWFNwenVpNWYwY2xtMUJGcG11SXl6ZWNTSUFTQTg5RXRSMW8vTTFTV2JlMG9FdFNtWVM5NkxLZFUvUi81Z2FhaTlkNkhSaWxZSFhsbHlXS2ZVUDZSYmlqUnExMEtFVkRweVdZSUhTTzdNL0JCWXJObnJoYUtMeHFpQmkvaGRyMTZETVdvRlZqb3VWOFExSUxjdFNSZWhabFcwVGFJUEVVYjI2aGJyWHBDdHRmQkVzbnVtT0UyZy9wWDZKSFc3TlBjZlRBbStvR3hncFpjTXh0YnZWa0ZHcmQ2Nnh4ejUvSU96aXlIamxEMFhCcCt4dlZZcUhmYTdRdWNpcmwxbi9sVnlLUjh2Y0YxQkJYd1RpZ2lFSDZibHJoZG1xeGYya3dwaW5GWUQyWERpVmoremw2Q1pwYnNCUjlBRVQ2elJZQnl4aGNEa1UyWnByaWwzaDBXZmQzbm40ZSIsIml2IjoiSTNFWVRlTFdJK0VMVUVBeiIsInRhZyI6IlBkVXFEdDhoRHJQbUlJUEgzU3hQY3c9PSIsImN0IjoibExqeURmb3FtcWVFNHlJMlBicjJXdWFjZ216ZExLdWE2UENBSjg1bUZBeDl3bnpLYUVBUzg4eTJDRVlLTXV0K0lBcDNZQWMySWc1MU9GdEZsaWgwNHVRb0thVUI4QkhHIn0="
+        },
+        "client_secret": {
+          "encrypted": true,
+          "value": "eyJ2IjoxLCJhbGciOiJSU0EtT0FFUC0yNTYrQTI1NkdDTSIsImsiOiJaZGNINEJVVGt2bjVNbmg4MzFzUjRUOVNSTDBSeU9iMXVhZjVRc0EzOVZ2c29UdWpGY2psK2d0bFhXSzNxeUN6SmtKMTN4Y1RsU3lHUERSeHVBUjBWREVaTWhXSnZlNVBHR2ZSU2JaV2JqOEo4TUNQVzJHaVJkVTM1eVIrUGtnMkczRzlnaTdhOUxwUTA4cUtSYWdNUjgwUmZHMlQ3RC9xaG13ODRkUndjK09RZXh6YThWL3h5WW1NN3lqMXpldDBrNnh1MkFMNUVwVXhVZnRhUG1weW5PWlI1SFoxVE9kVnNWcDlzeVBpcHZvRjhRRFBWeUlHdERXV3poenE4QUtkSFVpNC9rYzh3ZldzdUQwdDg0SXFBMjZJMHl0dVZ5Q2F2WG1EbENseTBBL1pEZVAybEFmOFJndG5iK2NLYzJVaTdocDA1R1lHYVJkY3F6QjRHelhsVWRBdzFURkhxNDNRb3FPaHNQdVJEb29kUURqcGZ0VnhhQ2ExTEs2ZTV5ME9wTlFHaXNENGlqazBOZkllc1ZEWWMwZHByZEVkUVhnYzJEQ1o4UEJ1ZkFuejM3V3hJR1h5ZXduelJRM0l5US9YeDIvOFBHM2lrdW5pcDNuYVF0cExMcDIxZks2QUZEbTN6ZC92NVhzSXp0NzlTQUFDYmtZUzFaQ3l2cEc2c21qcSIsIml2IjoiOEwrRXdpU2FFTmRmRmZIRiIsInRhZyI6InRhbTRYWUtYdG9IcjRmSVdTYnowdUE9PSIsImN0IjoiYnlsT2NNbkNsV0tuWWk3OXlSS1FZODVRa2ZCcEx1ZUlWblpvSDNiZm1TVzJCSm89In0="
+        },
+        "scopes": "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/calendar.readonly",
+        "authorize_url": "https://accounts.google.com/o/oauth2/v2/auth",
+        "token_url": "https://oauth2.googleapis.com/token",
+        "content_type": "application/x-www-form-urlencoded",
+        "token_field_name": "access_token",
+        "default_token_expiry": 3600,
+        "authorize_params": {
+          "access_type": "offline",
+          "prompt": "consent"
+        }
+      }
+    },
+    {
+      "service_name": "google_business",
+      "display_name": "Google (business-wide)",
+      "auth_type": "oauth",
+      "auth_level": "business",
+      "required_entitlement": null,
+      "base_service_url": "https://www.googleapis.com",
+      "auth_credentials": {
+        "client_id": {
+          "encrypted": true,
+          "value": "eyJ2IjoxLCJhbGciOiJSU0EtT0FFUC0yNTYrQTI1NkdDTSIsImsiOiJCb1l3UnR6TU5EMkw4RXlSNXV5QVhWTE94VEgwaFVRZnNJaEE2QVU2OGVEWVhZejd6NGh0RWNTeFdxbDlZa21LR2FzQlV1SUtYcW1UMEl4TUlvY2dCSzBLclNGbnp4VytISUEveEZjS25kREhiWFNFT20za2hKRVNjTkd0aGhQMUV0SkJ3Y1VMZ1NIbURQWnhyZjV4YnRYaHRMTklUTEFmOXNKTHAvZUZrWFNwenVpNWYwY2xtMUJGcG11SXl6ZWNTSUFTQTg5RXRSMW8vTTFTV2JlMG9FdFNtWVM5NkxLZFUvUi81Z2FhaTlkNkhSaWxZSFhsbHlXS2ZVUDZSYmlqUnExMEtFVkRweVdZSUhTTzdNL0JCWXJObnJoYUtMeHFpQmkvaGRyMTZETVdvRlZqb3VWOFExSUxjdFNSZWhabFcwVGFJUEVVYjI2aGJyWHBDdHRmQkVzbnVtT0UyZy9wWDZKSFc3TlBjZlRBbStvR3hncFpjTXh0YnZWa0ZHcmQ2Nnh4ejUvSU96aXlIamxEMFhCcCt4dlZZcUhmYTdRdWNpcmwxbi9sVnlLUjh2Y0YxQkJYd1RpZ2lFSDZibHJoZG1xeGYya3dwaW5GWUQyWERpVmoremw2Q1pwYnNCUjlBRVQ2elJZQnl4aGNEa1UyWnByaWwzaDBXZmQzbm40ZSIsIml2IjoiSTNFWVRlTFdJK0VMVUVBeiIsInRhZyI6IlBkVXFEdDhoRHJQbUlJUEgzU3hQY3c9PSIsImN0IjoibExqeURmb3FtcWVFNHlJMlBicjJXdWFjZ216ZExLdWE2UENBSjg1bUZBeDl3bnpLYUVBUzg4eTJDRVlLTXV0K0lBcDNZQWMySWc1MU9GdEZsaWgwNHVRb0thVUI4QkhHIn0="
+        },
+        "client_secret": {
+          "encrypted": true,
+          "value": "eyJ2IjoxLCJhbGciOiJSU0EtT0FFUC0yNTYrQTI1NkdDTSIsImsiOiJaZGNINEJVVGt2bjVNbmg4MzFzUjRUOVNSTDBSeU9iMXVhZjVRc0EzOVZ2c29UdWpGY2psK2d0bFhXSzNxeUN6SmtKMTN4Y1RsU3lHUERSeHVBUjBWREVaTWhXSnZlNVBHR2ZSU2JaV2JqOEo4TUNQVzJHaVJkVTM1eVIrUGtnMkczRzlnaTdhOUxwUTA4cUtSYWdNUjgwUmZHMlQ3RC9xaG13ODRkUndjK09RZXh6YThWL3h5WW1NN3lqMXpldDBrNnh1MkFMNUVwVXhVZnRhUG1weW5PWlI1SFoxVE9kVnNWcDlzeVBpcHZvRjhRRFBWeUlHdERXV3poenE4QUtkSFVpNC9rYzh3ZldzdUQwdDg0SXFBMjZJMHl0dVZ5Q2F2WG1EbENseTBBL1pEZVAybEFmOFJndG5iK2NLYzJVaTdocDA1R1lHYVJkY3F6QjRHelhsVWRBdzFURkhxNDNRb3FPaHNQdVJEb29kUURqcGZ0VnhhQ2ExTEs2ZTV5ME9wTlFHaXNENGlqazBOZkllc1ZEWWMwZHByZEVkUVhnYzJEQ1o4UEJ1ZkFuejM3V3hJR1h5ZXduelJRM0l5US9YeDIvOFBHM2lrdW5pcDNuYVF0cExMcDIxZks2QUZEbTN6ZC92NVhzSXp0NzlTQUFDYmtZUzFaQ3l2cEc2c21qcSIsIml2IjoiOEwrRXdpU2FFTmRmRmZIRiIsInRhZyI6InRhbTRYWUtYdG9IcjRmSVdTYnowdUE9PSIsImN0IjoiYnlsT2NNbkNsV0tuWWk3OXlSS1FZODVRa2ZCcEx1ZUlWblpvSDNiZm1TVzJCSm89In0="
+        },
+        "scopes": "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/calendar.readonly",
+        "authorize_url": "https://accounts.google.com/o/oauth2/v2/auth",
+        "token_url": "https://oauth2.googleapis.com/token",
+        "content_type": "application/x-www-form-urlencoded",
+        "token_field_name": "access_token",
+        "default_token_expiry": 3600,
+        "authorize_params": {
+          "access_type": "offline",
+          "prompt": "consent"
+        }
+      }
+    },
+    {
+      "service_name": "echo_basic",
+      "display_name": "Header Echo (basic token)",
+      "auth_type": "basic_auth_token_provided",
+      "auth_level": "global",
+      "required_entitlement": null,
+      "base_service_url": "https://hypothesis.sh/api/httptest",
+      "auth_credentials": {
+        "integration_secret_api_name": "kitchen_sink__api_key"
+      }
+    },
+    {
+      "service_name": "dad_jokes",
+      "display_name": "Dad Jokes (no auth)",
+      "auth_type": "no_auth",
+      "required_entitlement": null,
+      "base_service_url": "https://icanhazdadjoke.com"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+/* Kitchen Sink App · Block · Ping Block · styles */
+
+/* Engine-scoped (@scope) at inject time - write plain selectors. Each block ships its own
+ * styles.css; there is no cross-block shared stylesheet. The hit state drives its accent from
+ * the inline `--pp-accent` custom property set by eventScripts/receive.js.
+ */
+
+.pp-card {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  border-left: 5px solid #475569;
+}
+
+.pp-card--hit {
+  border-left-width: 8px;
+  border-left-color: var(--pp-accent, #f97316);
+  animation: pp-pop 220ms ease-out;
+}
+
+@keyframes pp-pop {
+  from {
+    transform: scale(0.98);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pp-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--pp-accent, #f97316);
+  color: #0f172a;
+}
+
+.pp-rally {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.pp-msg {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.pp-msg strong {
+  color: #f8fafc;
+}
+
+.pp-btn {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--pp-accent, #f97316);
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.pp-btn:hover {
+  filter: brightness(1.1);
+}

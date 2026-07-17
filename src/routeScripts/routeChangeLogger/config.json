@@ -1,0 +1,6 @@
+{
+  "name": "Route Change Logger",
+  "api_name": "route_change_logger",
+  "hint_object_name": "client_client",
+  "routes": []
+}

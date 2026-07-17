@@ -1,0 +1,5 @@
+{
+  "label": "Inspect Object",
+  "api_name": "inspect_object",
+  "when": "Boolean({{config.enableObjectSettingsItem}})"
+}

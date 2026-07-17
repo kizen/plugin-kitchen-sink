@@ -1,0 +1,19 @@
+{
+  "name": "Fail On Purpose",
+  "plugin_description": "Kitchen Sink demo automation step for exercising the negative path: this step always fails.",
+  "action_description": "Always fails, in the mode you pick (raise, http_error, or timeout)",
+  "action_type": "kitchen_sink_fail_on_purpose",
+  "runtime": "python 3.13",
+  "inputs": [
+    {
+      "name": "failure_mode",
+      "label": "Failure Mode",
+      "data_type": "string",
+      "required": true,
+      "input_source": "static_value",
+      "allowed_values": ["raise", "http_error", "timeout"],
+      "script_alias": "failure_mode"
+    }
+  ],
+  "outputs": []
+}

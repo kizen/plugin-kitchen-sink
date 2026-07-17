@@ -1,0 +1,23 @@
+{
+  "name": "Secret API Call (429 Retry Demo)",
+  "plugin_description": "Kitchen Sink demo automation step exercising the api_key integration secret end-to-end from Python.",
+  "action_description": "Builds a Basic-auth Authorization header from the api_key integration secret and calls httptest (hypothesis.sh/api/httptest) directly with requests. Trips its always-429 status endpoint first to exercise exponential-backoff retry with Retry-After handling, then calls the header-echo endpoint to confirm the secret made it.",
+  "action_type": "kitchen_sink_secret_api_call",
+  "runtime": "python 3.13",
+  "secrets": ["api_key"],
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "echoed_auth_header",
+      "label": "Echoed Authorization Header",
+      "data_type": "string",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "target",
+      "hint_related_object_field_name": null,
+      "script_alias": "echoed_auth_header",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    }
+  ]
+}

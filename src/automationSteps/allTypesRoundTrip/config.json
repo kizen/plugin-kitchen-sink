@@ -1,0 +1,231 @@
+{
+  "name": "All Types Round Trip",
+  "plugin_description": "Kitchen Sink demo automation step covering every automation-step data_type the plugin engine supports.",
+  "action_description": "Reads one input of each supported data_type, logs the Python type it deserialized to, and writes it straight back out on the matching output. Scalar types (string, number, boolean, date, datetime, uuid) round-trip unmodified. Reference types (employee, entity) and phone_number are asymmetric: the script sees a scalar (an id string / E.164 string), but the write path re-hydrates a record or re-validates — so the value only survives if it is a valid id/number for the target field.",
+  "action_type": "kitchen_sink_all_types_round_trip",
+  "runtime": "python 3.13",
+  "inputs": [
+    {
+      "name": "input_string",
+      "label": "String In",
+      "data_type": "string",
+      "required": true,
+      "input_source": "object_field",
+      "hint_field_name": "target",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_string"
+    },
+    {
+      "name": "input_email",
+      "label": "Email In",
+      "data_type": "email",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "email",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_email"
+    },
+    {
+      "name": "input_boolean",
+      "label": "Boolean In",
+      "data_type": "boolean",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "is_active",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_boolean"
+    },
+    {
+      "name": "input_number",
+      "label": "Number In",
+      "data_type": "number",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "amount",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_number"
+    },
+    {
+      "name": "input_date",
+      "label": "Date In",
+      "data_type": "date",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "start_date",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_date"
+    },
+    {
+      "name": "input_datetime",
+      "label": "Datetime In",
+      "data_type": "datetime",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "last_synced_at",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_datetime"
+    },
+    {
+      "name": "input_phone_number",
+      "label": "Phone Number In",
+      "data_type": "phone_number",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "business_phone",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_phone_number"
+    },
+    {
+      "name": "input_employee",
+      "label": "Employee In",
+      "data_type": "employee",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "owner",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_employee"
+    },
+    {
+      "name": "input_entity",
+      "label": "Entity In",
+      "data_type": "entity",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "related_contact",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_entity"
+    },
+    {
+      "name": "input_uuid",
+      "label": "UUID In (variable)",
+      "data_type": "uuid",
+      "required": false,
+      "input_source": "variable",
+      "hint_field_name": "external_id",
+      "hint_related_object_field_name": null,
+      "script_alias": "input_uuid"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "output_string",
+      "label": "String Out",
+      "data_type": "string",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "target",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_string",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    },
+    {
+      "name": "output_email",
+      "label": "Email Out",
+      "data_type": "email",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "email",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_email",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    },
+    {
+      "name": "output_boolean",
+      "label": "Boolean Out",
+      "data_type": "boolean",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "is_active",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_boolean",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    },
+    {
+      "name": "output_number",
+      "label": "Number Out",
+      "data_type": "number",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "amount",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_number",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    },
+    {
+      "name": "output_date",
+      "label": "Date Out",
+      "data_type": "date",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "start_date",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_date",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    },
+    {
+      "name": "output_datetime",
+      "label": "Datetime Out",
+      "data_type": "datetime",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "last_synced_at",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_datetime",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    },
+    {
+      "name": "output_phone_number",
+      "label": "Phone Number Out",
+      "data_type": "phone_number",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "business_phone",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_phone_number",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    },
+    {
+      "name": "output_employee",
+      "label": "Employee Out",
+      "data_type": "employee",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "owner",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_employee",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    },
+    {
+      "name": "output_entity",
+      "label": "Entity Out",
+      "data_type": "entity",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "related_contact",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_entity",
+      "conflict_resolution": "update_if_blank",
+      "create_field_options": false
+    },
+    {
+      "name": "output_uuid",
+      "label": "UUID Out",
+      "data_type": "uuid",
+      "required": false,
+      "input_source": "object_field",
+      "hint_field_name": "external_id",
+      "hint_related_object_field_name": null,
+      "script_alias": "output_uuid",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    }
+  ]
+}

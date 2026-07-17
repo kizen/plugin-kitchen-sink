@@ -1,0 +1,12 @@
+{
+  "name": "Script Widget",
+  "api_name": "script_widget",
+  "title": "Script Widget",
+  "header_color": "teal",
+  "header_text_color": "white",
+  "default_position": "bottom-left-fixed",
+  "minimized_style": "bar",
+  "height": 420,
+  "width": 320,
+  "when": "Boolean({{config.enableFloatingFrames}})"
+}
