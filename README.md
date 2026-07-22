@@ -128,11 +128,19 @@ discarded — to change the record, write through the API and call `refreshEntit
 Persistent, minimizable widgets anchored to a corner of the app:
 
 - **scriptWidget** — a script-rendered frame (`outputUI`) with buttons for every
-  frame-only context method: `hide`, `collapse`, `expand`, `hideHeader`, `showHeader`.
+  frame-only context method: `hide`, `collapse`, `expand`, `hideHeader`, `showHeader`. The
+  only `bottom-left-fixed` frame, which is why it demos `hideHeader`/`showHeader` (honored
+  only on fixed frames). Fixed forces `minimized_style: "circle"` — the engine anchors a
+  fixed frame to its minimized circle trigger, so a `bar`-style fixed frame would never
+  reposition on resize — and its `minimized_config` sets the circle via a platform icon
+  name (`window-restore`).
 - **iframeScoped** — embeds an external page with an origin-scoped `allow` grant, and
-  documents how permission delegation flows through the iframe proxy.
+  documents how permission delegation flows through the iframe proxy. Uses
+  `minimized_style: "bar"`, valid here because it is non-fixed (`bottom-right`).
 - **iframeBridge** — the two-way postMessage bridge: `message.js` receives what the framed
-  page posts, relays it to an event script, and acks back down into the frame.
+  page posts, relays it to an event script, and acks back down into the frame. Its
+  `minimized_config` sets the circle from a bundled `customIconFile` instead of a platform
+  icon name.
 
 ### Object settings items (`src/objectSettingsItems/`)
 

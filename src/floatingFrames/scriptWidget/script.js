@@ -4,8 +4,11 @@
 // data-script buttons linked to handlers in eventScripts/. Five buttons each call one frame-only context method
 // (hide/collapse/expand/hideHeader/showHeader). hideHeader/showHeader are honored only on fixed
 // frames (default_position *-fixed - a non-fixed frame is dragged by its header) so this one is
-// bottom-left-fixed. The sixth button reuses the dad_jokes service to show a frame is a full worker
-// context. show() is called automatically, so nothing here explicitly needs to show the initial frame.
+// bottom-left-fixed. Fixed frames also require minimized_style "circle": the engine positions a
+// fixed frame by anchoring it to its minimized circle trigger element, so a fixed frame with the
+// "bar" style has nothing to anchor to and never repositions on browser resize. The sixth button
+// reuses the dad_jokes service to show a frame is a full worker context. show() is called
+// automatically, so nothing here explicitly needs to show the initial frame.
 
 this.outputUI(`
   <div class="sw-widget">
