@@ -154,8 +154,10 @@ Entries added to an object's settings menu:
 
 A routable full-page app page at `/plugins/kitchen_sink/app_page`, also exposed as a
 toolbar entry (`is_toolbar_item`). Demonstrates query args on `this.args`, form and button
-event scripts, and the OAuth pair: `eventScripts/authorizeGoogle.js` starts the flow and
-`callback.js` runs when the app delivers the plugin callback.
+event scripts, and starting a user-level OAuth flow: `eventScripts/authorizeGoogle.js` calls
+`this.authorize()`, which opens the flow in a new tab; the outcome shows on the plugin's
+marketplace Authorization panel. (Page `callback.js` handlers are out of scope for this
+plugin — they belong to iframe-embedded flows that end at `/plugins/callback`.)
 
 ### Route scripts (`src/routeScripts/`)
 

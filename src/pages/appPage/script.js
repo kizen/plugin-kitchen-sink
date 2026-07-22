@@ -8,7 +8,7 @@
 // The authorizeGoogle button runs its defined event script. this.args is the URL query parsed to an
 // object (?ref=email becomes { ref: "email" });
 //
-// The engine also injects internal keys, filtered below. callback.js is the return handler.
+// The engine also injects internal keys, filtered below.
 //
 // Field-name gotcha: outputUI markup is sanitized with DOMPurify, whose DOM-clobbering
 // protection strips any name/id attribute whose VALUE is a property of document or of a form
@@ -64,9 +64,10 @@ this.outputUI(`
     </section>
 
     <section class="ks-card">
-      <h2>OAuth authorize &amp; callback</h2>
-      <p class="ks-muted">Opens the Google authorization flow. When the app delivers the callback,
-      this page's <code>callback.js</code> runs with the callback's query parameters.</p>
+      <h2>OAuth authorize</h2>
+      <p class="ks-muted">Opens the Google authorization flow in a new tab. When the flow
+      completes, that tab lands on the plugin's marketplace Authorization panel, which shows the
+      result.</p>
       <button type="button" class="ks-btn" data-script="authorizeGoogle">Authorize Google</button>
     </section>
   </div>
