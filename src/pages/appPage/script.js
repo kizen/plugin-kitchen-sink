@@ -9,6 +9,11 @@
 // object (?ref=email becomes { ref: "email" });
 //
 // The engine also injects internal keys, filtered below. callback.js is the return handler.
+//
+// Field-name gotcha: outputUI markup is sanitized with DOMPurify, whose DOM-clobbering
+// protection strips any name/id attribute whose VALUE is a property of document or of a form
+// element (name, id, action, method, title, length, ...). An <input name="name"> silently loses
+// its name and never reaches formData - hence "your-name" below.
 
 const INTERNAL_ARG_KEYS = new Set(["pluginId", "__kizen_user_config"]);
 
@@ -45,7 +50,7 @@ this.outputUI(`
       <code>this.args.formData</code>.</p>
       <form class="ks-form" data-script="greet">
         <label>Your name
-          <input name="name" type="text" placeholder="Jane" required />
+          <input name="your-name" type="text" placeholder="Jane" required />
         </label>
         <label>Mood
           <select name="mood">
