@@ -1,0 +1,55 @@
+/* Kitchen Sink App · View · Summary View · styles */
+
+.sv-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.sv-intro {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.sv-intro code,
+.sv-raw code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.sv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.sv-table th {
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  padding: 8px 10px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.sv-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #0f172a;
+  vertical-align: top;
+}
+
+.sv-name {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sv-empty {
+  color: #94a3b8;
+  font-style: italic;
+}

@@ -1,0 +1,65 @@
+/* Kitchen Sink App · View · Form View · styles */
+
+/* The engine scopes these styles to this view. */
+
+.fv-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.fv-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fv-fieldset {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 0;
+}
+
+.fv-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.fv-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.fv-input {
+  font: inherit;
+  font-size: 14px;
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #0f172a;
+  background: #f9fafb;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.fv-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background: #ffffff;
+}
+
+.fv-textarea {
+  resize: vertical;
+  min-height: 90px;
+}

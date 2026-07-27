@@ -1,0 +1,5 @@
+{
+  "name": "Record Lifecycle - Create then Delete",
+  "api_name": "record_lifecycle",
+  "hint_object_name": "client_client"
+}

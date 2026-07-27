@@ -1,0 +1,5 @@
+{
+  "name": "Relationship Add Override - Create Related Record",
+  "api_name": "relationship_add_override",
+  "hint_object_name": "client_client"
+}

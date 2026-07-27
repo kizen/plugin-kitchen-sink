@@ -1,0 +1,22 @@
+{
+  "name": "Dad Joke",
+  "plugin_description": "Kitchen Sink demo automation step. Fetches a random dad joke from a free API.",
+  "action_description": "Calls icanhazdadjoke.com directly and writes a random dad joke to the target output.",
+  "action_type": "kitchen_sink_dad_joke",
+  "runtime": "python 3.13",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "target",
+      "label": "Dad Joke",
+      "data_type": "string",
+      "required": true,
+      "input_source": "object_field",
+      "hint_field_name": "target",
+      "hint_related_object_field_name": null,
+      "script_alias": "target",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    }
+  ]
+}

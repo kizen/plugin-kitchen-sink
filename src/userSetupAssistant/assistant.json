@@ -1,0 +1,39 @@
+{
+  "services": [
+    {
+      "api_name": "google_user",
+      "required": false,
+      "prerequisite": true
+    }
+  ],
+  "fields": [
+    {
+      "type": "description",
+      "key": "userAssistantIntro",
+      "content": "Unlike the business setup assistant, each user answers this one for **themselves**. The values are user-scoped: scripts read them as `this.userConfig.<key>`, and one user's answers never affect another's. The `google_user` prerequisite above is the user-level OAuth counterpart to the business-level `google_business` service — each user connects their own Google account. (`required` is false here so setup stays completable before OAuth credentials are configured; a real plugin that can't function without the connection would set it to true.)"
+    },
+    {
+      "type": "text",
+      "label": "Display Nickname",
+      "key": "userNickname",
+      "required": false,
+      "placeholder": "e.g. KJ",
+      "tooltip": "A user-scoped scalar — read back as this.userConfig.userNickname."
+    },
+    {
+      "type": "boolean",
+      "label": "Enable My Calendars",
+      "key": "enableUserCalendars",
+      "default": true
+    },
+    {
+      "type": "select",
+      "label": "My Google Calendars",
+      "key": "userGoogleCalendars",
+      "required": false,
+      "allow_multiple": true,
+      "when": "Boolean({{enableUserCalendars}})",
+      "tooltip": "Fetched through the google_user service proxy with your own token — authorize the service above first."
+    }
+  ]
+}

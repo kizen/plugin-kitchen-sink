@@ -1,0 +1,16 @@
+{
+  "name": "Iframe Bridge",
+  "api_name": "iframe_bridge",
+  "title": "Iframe Bridge",
+  "header_color": "rgb(88, 28, 135)",
+  "header_text_color": "rgb(255, 255, 255)",
+  "default_position": "bottom-left",
+  "minimized_style": "circle",
+  "minimized_config": {
+    "color": "rgb(88, 28, 135)",
+    "customIconFile": "trigger.svg"
+  },
+  "height": 720,
+  "width": 560,
+  "when": "Boolean({{config.enableFloatingFrames}})"
+}

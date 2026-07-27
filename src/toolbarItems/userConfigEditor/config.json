@@ -1,0 +1,6 @@
+{
+  "api_name": "user_config_editor",
+  "label": "My Settings",
+  "icon": "cog",
+  "color": "#7c3aed"
+}

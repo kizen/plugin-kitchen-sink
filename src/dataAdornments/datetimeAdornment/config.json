@@ -1,0 +1,7 @@
+{
+  "icon": "calendar",
+  "color": "green",
+  "tooltip": "Relative Time",
+  "field_type": "datetime",
+  "when": "Boolean({{config.enableAdornments}})"
+}

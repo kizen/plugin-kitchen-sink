@@ -1,0 +1,12 @@
+{
+  "name": "Iframe Scoped",
+  "api_name": "iframe_scoped",
+  "title": "Iframe Scoped",
+  "header_color": "#1d4ed8",
+  "header_text_color": "white",
+  "default_position": "bottom-right",
+  "minimized_style": "bar",
+  "height": 640,
+  "width": 480,
+  "when": "Boolean({{config.enableFloatingFrames}})"
+}

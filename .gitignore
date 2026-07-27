@@ -1,0 +1,4 @@
+.DS_Store
+.kizenapp/
+__pycache__/
+*.pyc

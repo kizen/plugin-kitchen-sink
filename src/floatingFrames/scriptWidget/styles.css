@@ -1,0 +1,48 @@
+/* Kitchen Sink App · Floating Frame · Script Widget · styles */
+
+.sw-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.sw-lead {
+  margin: 0;
+  font-size: 13px;
+  color: #475569;
+}
+
+.sw-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sw-btn {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.sw-btn:hover {
+  background: #eef2f7;
+}
+
+.sw-btn--accent {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #ffffff;
+}
+
+.sw-btn--accent:hover {
+  background: #0c5f59;
+}

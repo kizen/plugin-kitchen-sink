@@ -1,0 +1,6 @@
+{
+  "name": "Details Tab Gate",
+  "api_name": "details_gate",
+  "hint_object_name": "client_client",
+  "routes": ["/details"]
+}
