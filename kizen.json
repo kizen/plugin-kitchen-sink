@@ -8,11 +8,12 @@
   "entry": "src/",
   "engine": "1.0.0",
   "release_notes_directory": "releaseNotes/",
-  "release_environments": ["staging"],
+  "release_branches": ["main"],
+  "release_environments": ["dev", "prod"],
   "required_entitlement": "developer_program_member",
   "developer_business_id": {
-    "integration": "0dd69e01-bbcc-47d9-86d8-b038308b773a",
-    "staging": "44195f27-eb88-49b9-bf18-f8f152b6f68f",
+    "integration": "725f64e5-4124-46cc-92c4-d16049add76e",
+    "staging": "725f64e5-4124-46cc-92c4-d16049add76e",
     "go": "ddbdd2ce-cfe9-4bfb-aae6-33aefe24445f",
     "fmo": "791bdf51-5865-40e4-9719-df8e80b99485"
   },
