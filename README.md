@@ -47,7 +47,7 @@ flows through `data-script` attributes — there is no `addEventListener`.
 
 ### kizen.json — services and manifest
 
-Declares four services, one per auth shape:
+Declares five services across four auth shapes:
 
 | Service           | auth_type                 | auth_level | Consumed by                                                                             |
 | ----------------- | ------------------------- | ---------- | --------------------------------------------------------------------------------------- |
@@ -55,6 +55,7 @@ Declares four services, one per auth shape:
 | `google_business` | oauth                     | business   | calendar source, setup assistant async selects                                          |
 | `echo_basic`      | basic_auth_token_provided | global     | performActionDemo action                                                                |
 | `dad_jokes`       | no_auth                   | —          | dadJokeWriteback and failureModes actions, detailsGate route script, scriptWidget frame |
+| `yahoo_finance`   | no_auth                   | —          | stockPriceWriteback action                                                              |
 
 Also demonstrates `base_config.secrets`, top-level `required_entitlement`, and an install
 config sourced entirely from the setup assistant (`config_template` is empty).
@@ -67,6 +68,8 @@ surfaces below):
 - **dadJokeWriteback** — record writeback: the overwrite shape (`{name, value}`) and the
   append shape (`{name, add_values}`), plus calling an external API through the service
   proxy with `this.getServiceUrl()`.
+- **stockPriceWriteback** — same writeback shapes as dadJokeWriteback, but fetches AAPL's
+  current price from the `yahoo_finance` service instead.
 - **relationshipAddOverride** — replaces the standard "Add Record" modal on a relationship
   field. Documents the return-value contract: return the new record's id as a non-empty
   string, or undefined to do nothing.
@@ -85,6 +88,8 @@ Code steps a workflow author drops into an automation:
 - **secretApiCall** — reads the namespaced `api_key` secret, builds a Basic auth header,
   and demonstrates 429 retry with exponential backoff and Retry-After handling.
 - **dadJoke** — the simplest possible step: one GET, one output.
+- **getTickerPrice** — same shape as dadJoke: one GET (Yahoo Finance's chart API, no auth) for
+  AAPL's current market price, one numeric output.
 - **failOnPurpose** — always fails: plain exception, unhandled HTTP error, or timeout.
 
 Python steps call external APIs directly with `requests` — they have no access to the

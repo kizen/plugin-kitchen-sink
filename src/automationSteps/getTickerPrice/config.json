@@ -1,0 +1,22 @@
+{
+  "name": "Get Ticker Price",
+  "plugin_description": "Kitchen Sink demo automation step. Fetches AAPL's current market price from a free API.",
+  "action_description": "Calls Yahoo Finance's chart API directly and writes AAPL's regular market price to the target output.",
+  "action_type": "kitchen_sink_get_ticker_price",
+  "runtime": "python 3.13",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "target",
+      "label": "AAPL Price",
+      "data_type": "number",
+      "required": true,
+      "input_source": "object_field",
+      "hint_field_name": "target",
+      "hint_related_object_field_name": null,
+      "script_alias": "target",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Stock Price Writeback",
+  "api_name": "stock_price_writeback",
+  "hint_object_name": "client_client"
+}

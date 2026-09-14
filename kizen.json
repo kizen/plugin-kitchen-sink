@@ -1,6 +1,6 @@
 {
   "name": "Kitchen Sink",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "published": true,
   "api_name": "kitchen_sink",
   "external_link": "https://developer.kizen.com",
@@ -8,11 +8,10 @@
   "entry": "src/",
   "engine": "1.0.0",
   "release_notes_directory": "releaseNotes/",
-  "release_branches": ["main"],
-  "release_environments": ["dev", "prod"],
+  "release_environments": ["integration"],
   "required_entitlement": "developer_program_member",
   "developer_business_id": {
-    "integration": "725f64e5-4124-46cc-92c4-d16049add76e",
+    "integration": "0dd69e01-bbcc-47d9-86d8-b038308b773a",
     "staging": "725f64e5-4124-46cc-92c4-d16049add76e",
     "go": "ddbdd2ce-cfe9-4bfb-aae6-33aefe24445f",
     "fmo": "791bdf51-5865-40e4-9719-df8e80b99485"
@@ -95,6 +94,13 @@
       "auth_type": "no_auth",
       "required_entitlement": null,
       "base_service_url": "https://icanhazdadjoke.com"
+    },
+    {
+      "service_name": "yahoo_finance",
+      "display_name": "Yahoo Finance (no auth)",
+      "auth_type": "no_auth",
+      "required_entitlement": null,
+      "base_service_url": "https://query1.finance.yahoo.com"
     }
   ]
 }
