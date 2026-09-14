@@ -68,8 +68,9 @@ surfaces below):
 - **dadJokeWriteback** — record writeback: the overwrite shape (`{name, value}`) and the
   append shape (`{name, add_values}`), plus calling an external API through the service
   proxy with `this.getServiceUrl()`.
-- **stockPriceWriteback** — same writeback shapes as dadJokeWriteback, but fetches AAPL's
-  current price from the `yahoo_finance` service instead.
+- **stockPriceWriteback** — same writeback shapes as dadJokeWriteback, but fetches a ticker's
+  current price from the `yahoo_finance` service instead. Reads the ticker symbol from the
+  record's `ticker` field, falling back to AAPL if it's blank.
 - **relationshipAddOverride** — replaces the standard "Add Record" modal on a relationship
   field. Documents the return-value contract: return the new record's id as a non-empty
   string, or undefined to do nothing.
@@ -89,7 +90,8 @@ Code steps a workflow author drops into an automation:
   and demonstrates 429 retry with exponential backoff and Retry-After handling.
 - **dadJoke** — the simplest possible step: one GET, one output.
 - **getTickerPrice** — same shape as dadJoke: one GET (Yahoo Finance's chart API, no auth) for
-  AAPL's current market price, one numeric output.
+  a given ticker's current market price, one numeric output. Takes a `ticker` input
+  (`input_source: "variable"`).
 - **failOnPurpose** — always fails: plain exception, unhandled HTTP error, or timeout.
 
 Python steps call external APIs directly with `requests` — they have no access to the
