@@ -1,7 +1,11 @@
 // Kitchen Sink App · View · Activity Object Detail View · viewToolbarTemplateFromReference
 //
 // Fired by clicking a Toolbar Template title under References. Fetches its detail and opens
-// toolbarTemplateDetailView on top of this one.
+// toolbarTemplateDetailView.
+//
+// closeModal() before opening the next view: see workflowDetailView/eventScripts/viewExecutions.js
+// for why — showViewInModal calls must chain sequentially (one closes, then the next opens), not
+// stack while the current View's own modal is still open, or the UI hangs.
 
 const formData = this.args?.formData ?? {};
 const toolbarTemplateId = formData.toolbarTemplateId?.[0];
@@ -21,6 +25,8 @@ if (!toolbarTemplateId) {
       { variant: "failure", autohide: false },
     );
   } else {
+    this.closeModal(undefined, true);
+
     await this.showViewInModal("toolbartemplatedetailview", {
       args: { toolbarTemplate },
       options: {

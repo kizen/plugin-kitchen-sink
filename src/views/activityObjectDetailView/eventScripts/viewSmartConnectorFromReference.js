@@ -1,7 +1,11 @@
 // Kitchen Sink App · View · Activity Object Detail View · viewSmartConnectorFromReference
 //
 // Fired by clicking a Smart Connector title under References. Fetches its detail and opens
-// smartConnectorDetailView on top of this one.
+// smartConnectorDetailView.
+//
+// closeModal() before opening the next view: see workflowDetailView/eventScripts/viewExecutions.js
+// for why — showViewInModal calls must chain sequentially (one closes, then the next opens), not
+// stack while the current View's own modal is still open, or the UI hangs.
 
 const formData = this.args?.formData ?? {};
 const smartConnectorId = formData.smartConnectorId?.[0];
@@ -21,6 +25,8 @@ if (!smartConnectorId) {
       { variant: "failure", autohide: false },
     );
   } else {
+    this.closeModal(undefined, true);
+
     await this.showViewInModal("smartconnectordetailview", {
       args: { smartConnector },
       options: {

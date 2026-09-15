@@ -4,6 +4,10 @@
 // variables in parallel and forwards all three to executionDetailView — variables is fetched
 // best-effort (its documented response schema looks unreliable; see executionDetailView for the
 // normalization this feeds).
+//
+// closeModal() before opening the next view: see workflowDetailView/eventScripts/viewExecutions.js
+// for why — showViewInModal calls must chain sequentially (one closes, then the next opens), not
+// stack while the current View's own modal is still open, or the UI hangs.
 
 const formData = this.args?.formData ?? {};
 const executionId = formData.executionId?.[0];
@@ -27,6 +31,8 @@ if (!executionId) {
       { variant: "failure", autohide: false },
     );
   } else {
+    this.closeModal(undefined, true);
+
     await this.showViewInModal("executiondetailview", {
       args: {
         execution,
