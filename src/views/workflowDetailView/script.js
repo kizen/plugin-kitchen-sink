@@ -1,9 +1,9 @@
 // Kitchen Sink App · View · Workflow Detail View
 //
 // Opened by Business Explorer's viewWorkflow event script, which forwards the fetched automation
-// through args.automation. Display-only — ported from the reference SPA's renderWorkflowDetail,
-// minus its "view executions" drill-down (a whole separate paginated modal) and CCDA-aware
-// variable-value rendering, both kept out of this first pass.
+// through args.automation. Display-only, except the Executions row, which opens
+// workflowExecutionsView (eventScripts/viewExecutions.js) — ported from the reference SPA's
+// renderWorkflowDetail, minus its CCDA-aware variable-value rendering, kept out of this pass.
 //
 // The exact shape of an automation's detail response (steps/triggers/variables field names)
 // isn't pinned down by the Kizen API docs, so this looks for a few likely field names first and
@@ -126,7 +126,16 @@ if (!automation) {
     ],
     [
       "Executions (Active / Paused / Done)",
-      `${automation.number_active ?? 0} / ${automation.number_paused ?? 0} / ${automation.number_completed ?? 0}`,
+      `
+        <form class="wdv-inline-form" data-script="viewExecutions">
+          <input type="hidden" name="automationId" value="${escapeHtml(automation.id ?? "")}" />
+          <input type="hidden" name="automationName" value="${escapeHtml(automation.name ?? "")}" />
+          <input type="hidden" name="active" value="${automation.number_active ?? 0}" />
+          <input type="hidden" name="paused" value="${automation.number_paused ?? 0}" />
+          <input type="hidden" name="completed" value="${automation.number_completed ?? 0}" />
+          <button type="submit" class="wdv-link-btn">${automation.number_active ?? 0} / ${automation.number_paused ?? 0} / ${automation.number_completed ?? 0}</button>
+        </form>
+      `,
     ],
   ];
 

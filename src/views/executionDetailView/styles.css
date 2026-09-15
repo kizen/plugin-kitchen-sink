@@ -1,6 +1,6 @@
-/* Kitchen Sink App · View · Workflow Detail View · styles */
+/* Kitchen Sink App · View · Execution Detail View · styles */
 
-.wdv-body {
+.edv-body {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -10,13 +10,13 @@
   color: #4a5660;
 }
 
-.wdv-grid {
+.edv-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px 24px;
 }
 
-.wdv-row {
+.edv-row {
   display: flex;
   justify-content: space-between;
   gap: 8px;
@@ -24,47 +24,75 @@
   border-bottom: 1px solid #f5f6f7;
 }
 
-.wdv-label {
+.edv-label {
   color: #7e8c98;
 }
 
-.wdv-inline-form {
-  margin: 0;
-  display: inline-block;
-}
-
-.wdv-link-btn {
-  border: none;
-  background: none;
-  color: #4090f7;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-}
-
-.wdv-link-btn:hover {
-  text-decoration: underline;
-}
-
-.wdv-value code {
-  background: #fafbfa;
-  border-radius: 3px;
-  padding: 1px 5px;
-}
-
-.wdv-section h4 {
+.edv-section h4 {
   margin: 0 0 8px;
   font-size: 13px;
 }
 
-.wdv-empty {
+.edv-empty {
   color: #94a3b8;
   font-style: italic;
   margin: 0;
 }
 
-.wdv-card {
+.edv-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.edv-pill--good {
+  background: #e3f9ed;
+  color: #357a67;
+}
+
+.edv-pill--bad {
+  background: #ffc9c9;
+  color: #ff3d30;
+}
+
+.edv-pill--warn {
+  background: #fff3cd;
+  color: #8a6d1d;
+}
+
+.edv-pill--neutral {
+  background: #eef4fe;
+  color: #4090f7;
+}
+
+.edv-table-scroll {
+  overflow-x: auto;
+  border: 1px solid #d8dde1;
+  border-radius: 8px;
+}
+
+.edv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.edv-table th,
+.edv-table td {
+  padding: 6px 10px;
+  text-align: left;
+  border-bottom: 1px solid #f5f6f7;
+}
+
+.edv-table code {
+  background: #fafbfa;
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.edv-card {
   padding: 10px 12px;
   border-radius: 6px;
   background: #f8faff;
@@ -72,13 +100,13 @@
   margin-bottom: 8px;
 }
 
-.wdv-card-header {
+.edv-card-header {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.wdv-card-index {
+.edv-card-index {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -91,67 +119,36 @@
   font-weight: 700;
 }
 
-.wdv-pill {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: #eef4fe;
-  color: #4090f7;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.wdv-card-desc {
+.edv-card-desc {
   margin-top: 6px;
   color: #7e8c98;
 }
 
-.wdv-stat-row {
+.edv-card-desc--error {
+  color: #ff3d30;
+}
+
+.edv-stat-row {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   margin-top: 6px;
 }
 
-.wdv-stat-chip {
+.edv-stat-chip {
   padding: 2px 8px;
   border-radius: 6px;
   background: #fafbfa;
   font-size: 11px;
 }
 
-.wdv-table-scroll {
-  overflow-x: auto;
-  border: 1px solid #d8dde1;
-  border-radius: 8px;
-}
-
-.wdv-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
-}
-
-.wdv-table th,
-.wdv-table td {
-  padding: 6px 10px;
-  text-align: left;
-  border-bottom: 1px solid #f5f6f7;
-}
-
-.wdv-table code {
-  background: #fafbfa;
-  border-radius: 3px;
-  padding: 1px 5px;
-}
-
-.wdv-raw summary {
+.edv-raw summary {
   cursor: pointer;
   color: #4090f7;
   font-size: 12px;
 }
 
-.wdv-raw pre {
+.edv-raw pre {
   margin-top: 8px;
   padding: 10px;
   background: #fafbfa;

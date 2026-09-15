@@ -2,10 +2,12 @@
 //
 // Opened by Business Explorer's viewActivityObject event script, which forwards
 // { object, references } through args (object always present; references is null if that
-// best-effort fetch failed). Display-only — ported from the reference SPA's
-// renderActivityObjectDetail, minus its cross-links into other tabs (view-object-from-reference,
-// view-workflow-from-reference) and the deep nested per-reference-type listings, kept out of this
-// first pass.
+// best-effort fetch failed). Display-only, except each referencing Automation, which opens
+// workflowDetailView (eventScripts/viewWorkflowFromReference.js) since this plugin already has
+// that view and its fetch is a single GET. The other five reference types (Smart Connectors,
+// Dashboards, Homepages, Filter Groups, Toolbar Templates) render as plain nested listings —
+// cross-linking those to their own detail views would mean building four more net-new views
+// against endpoints this plugin doesn't fetch anywhere else, kept out of this pass.
 
 const { object, references } = this.args ?? {};
 
@@ -33,6 +35,41 @@ const humanizeKey = (k) =>
   String(k)
     .replace(/_/g, " ")
     .replace(/\b\w/g, (c) => c.toUpperCase());
+
+// Nested list of one reference type (Automations, Smart Connectors, ...) under the References
+// section. `chipBuilder` is optional: (item) => [{label, value}] stat chips shown per item.
+// `titleHtml` is optional: (item) => HTML string for the title, falling back to plain text.
+const renderUsageSubsection = (label, arr, chipBuilder, titleHtml) => {
+  if (!arr || !arr.length) return "";
+
+  const items = arr
+    .map((item) => {
+      const chips = (chipBuilder ? chipBuilder(item) : []).filter(
+        (c) => c.value !== undefined && c.value !== null && c.value !== "",
+      );
+      const title = titleHtml?.(item) ?? `<strong>${escapeHtml(item.display_name ?? "—")}</strong>`;
+      return `
+        <li class="aodv-chip">
+          ${title}
+          ${
+            chips.length
+              ? `<div class="aodv-stat-row">${chips
+                  .map((c) => `<span class="aodv-stat-chip"><strong>${escapeHtml(c.label)}:</strong> ${escapeHtml(c.value)}</span>`)
+                  .join("")}</div>`
+              : ""
+          }
+        </li>
+      `;
+    })
+    .join("");
+
+  return `
+    <div class="aodv-subsection">
+      <div class="aodv-subsection-title">${escapeHtml(label)} (${arr.length})</div>
+      <ul class="aodv-chip-list">${items}</ul>
+    </div>
+  `;
+};
 
 if (!object) {
   this.outputUI(`<div class="aodv-body"><p class="aodv-empty">No activity object was selected.</p></div>`);
@@ -106,6 +143,53 @@ if (!object) {
       ["Toolbar Templates", references.toolbar_templates?.length],
     ].filter(([, value]) => value !== undefined && value !== null);
 
+    const automationsSubsection = renderUsageSubsection(
+      "Automations",
+      references.automations,
+      (a) => [
+        { label: "Steps", value: a.steps?.length || null },
+        { label: "Triggers", value: a.triggers?.length || null },
+        { label: "Conditions", value: a.conditions?.length || null },
+        { label: "Variables", value: a.variables?.length || null },
+        { label: "Goals", value: a.goals?.length || null },
+      ],
+      (a) =>
+        a.id
+          ? `
+            <form class="aodv-inline-form" data-script="viewWorkflowFromReference">
+              <input type="hidden" name="automationId" value="${escapeHtml(a.id)}" />
+              <button type="submit" class="aodv-link-btn">${escapeHtml(a.display_name ?? "Workflow")}</button>
+            </form>
+          `
+          : null,
+    );
+
+    const smartConnectorsSubsection = renderUsageSubsection("Smart Connectors", references.smart_connectors, null);
+    const dashboardsSubsection = renderUsageSubsection(
+      "Dashboards",
+      references.dashboards,
+      (d) => [{ label: "Dashlets", value: d.dashlets?.length || null }],
+    );
+    const homepagesSubsection = renderUsageSubsection(
+      "Homepages",
+      references.homepages,
+      (d) => [{ label: "Dashlets", value: d.dashlets?.length || null }],
+    );
+    const filterGroupsSubsection = renderUsageSubsection(
+      "Filter Groups",
+      references.filter_groups,
+      (f) => [{ label: "Object", value: f.custom_object_name }],
+    );
+    const toolbarTemplatesSubsection = renderUsageSubsection("Toolbar Templates", references.toolbar_templates, null);
+
+    const nothingElse =
+      !references.automations?.length &&
+      !references.smart_connectors?.length &&
+      !references.dashboards?.length &&
+      !references.homepages?.length &&
+      !references.filter_groups?.length &&
+      !references.toolbar_templates?.length;
+
     referencesSection = `
       <div class="aodv-section">
         <h4>References</h4>
@@ -114,8 +198,15 @@ if (!object) {
             ? `<div class="aodv-stat-row">${summaryChips
                 .map(([label, value]) => `<span class="aodv-stat-chip"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</span>`)
                 .join("")}</div>`
-            : `<p class="aodv-empty">No usage references returned by the API.</p>`
+            : ""
         }
+        ${automationsSubsection}
+        ${smartConnectorsSubsection}
+        ${dashboardsSubsection}
+        ${homepagesSubsection}
+        ${filterGroupsSubsection}
+        ${toolbarTemplatesSubsection}
+        ${nothingElse ? `<p class="aodv-empty">Not referenced by any automations, Smart Connectors, dashboards, or filter groups.</p>` : ""}
       </div>
     `;
   }

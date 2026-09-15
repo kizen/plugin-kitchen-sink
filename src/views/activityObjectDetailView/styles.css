@@ -81,6 +81,36 @@
   margin: 0;
 }
 
+.aodv-subsection {
+  margin-top: 14px;
+}
+
+.aodv-subsection-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #7e8c98;
+  margin-bottom: 8px;
+}
+
+.aodv-inline-form {
+  margin: 0;
+  display: inline;
+}
+
+.aodv-link-btn {
+  border: none;
+  background: none;
+  color: #4090f7;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.aodv-link-btn:hover {
+  text-decoration: underline;
+}
+
 .aodv-raw summary {
   cursor: pointer;
   color: #4090f7;

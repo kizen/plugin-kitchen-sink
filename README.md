@@ -181,9 +181,24 @@ Entries added to an object's settings menu:
   threaded through hidden form fields on every render rather than kept in a variable — the
   render/fetch logic is duplicated across `script.js` and each of `eventScripts/search.js`,
   `paginate.js`, and `switchTab.js`, the same pattern `dashboardBlock`'s `refresh.js` already
-  uses. Not yet ported from the reference app: the CCDA document viewer and the deeper
-  cross-linked "references" drill-downs (workflow executions list, per-reference-type
-  listings).
+  uses.
+
+  A workflow's Executions row opens **workflowExecutionsView** — status quick filters (with
+  count badges for the three statuses the workflow's own summary already knows: active,
+  paused, completed; the rest filter but show no count, since a true "All" total needs walking
+  every page of a cursor-paginated endpoint, deliberately skipped here to bound one dispatch's
+  request count), and a cursor-paginated executions table. Each execution opens
+  **executionDetailView** — meta, variables (normalized from the API's inconsistent response
+  shape), and step history. An Activity Object's References section nests listings per
+  reference type (Automations, Smart Connectors, Dashboards, Homepages, Filter Groups, Toolbar
+  Templates); Automations cross-link into `workflowDetailView` (a modal opened from inside
+  another modal) since this plugin already has that view, but the other five reference types
+  render as plain listings rather than five more net-new detail views.
+
+  Not yet ported from the reference app: the CCDA document viewer, and cross-links from
+  Activity Object references to Smart Connector/Dashboard/Homepage/Filter Group/Toolbar
+  Template detail views (would need building detail views for each against endpoints this
+  plugin doesn't otherwise fetch).
 
 ### Route scripts (`src/routeScripts/`)
 

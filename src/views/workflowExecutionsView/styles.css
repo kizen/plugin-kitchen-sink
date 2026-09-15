@@ -1,0 +1,137 @@
+/* Kitchen Sink App · View · Workflow Executions View · styles */
+
+.wev-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #4a5660;
+}
+
+.wev-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wev-inline-form {
+  margin: 0;
+  display: inline-block;
+}
+
+.wev-filter-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #d8dde1;
+  background: #fff;
+  color: #7e8c98;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.wev-filter-pill--active {
+  border-color: #4090f7;
+  background: #eef4fe;
+  color: #4090f7;
+}
+
+.wev-table-scroll {
+  overflow-x: auto;
+  border: 1px solid #d8dde1;
+  border-radius: 8px;
+}
+
+.wev-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.wev-table th,
+.wev-table td {
+  padding: 6px 10px;
+  text-align: left;
+  border-bottom: 1px solid #f5f6f7;
+  white-space: nowrap;
+}
+
+.wev-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.wev-pill--good {
+  background: #e3f9ed;
+  color: #357a67;
+}
+
+.wev-pill--bad {
+  background: #ffc9c9;
+  color: #ff3d30;
+}
+
+.wev-pill--warn {
+  background: #fff3cd;
+  color: #8a6d1d;
+}
+
+.wev-pill--neutral {
+  background: #eef4fe;
+  color: #4090f7;
+}
+
+.wev-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #4090f7;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.wev-btn--small {
+  padding: 4px 10px;
+}
+
+.wev-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.wev-empty,
+.wev-error {
+  padding: 20px;
+  text-align: center;
+  color: #7e8c98;
+  border: 1px solid #d8dde1;
+  border-radius: 8px;
+}
+
+.wev-error {
+  color: #ff3d30;
+  background: #ffc9c9;
+  border-color: #ff3d30;
+}
+
+.wev-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wev-pager-info {
+  color: #7e8c98;
+}
+
+.wev-pager-actions {
+  display: flex;
+  gap: 8px;
+}
