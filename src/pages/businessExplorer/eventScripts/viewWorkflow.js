@@ -4,7 +4,7 @@
 // detail (GET /automation2/automations/{id}) and forwards it to workflowDetailView.
 
 const formData = this.args?.formData ?? {};
-const automationId = formData.id?.[0];
+const automationId = formData.itemId?.[0];
 
 if (!automationId) {
   this.showToast("No workflow selected.", { variant: "failure" });

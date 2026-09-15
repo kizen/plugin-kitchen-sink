@@ -320,7 +320,10 @@ function renderExplorer(state, data, loadError) {
           ? `
             <td>
               <form class="be-inline-form" data-script="${cfg.detailScript}">
-                <input type="hidden" name="id" value="${escapeHtml(String(row.id ?? ""))}" />
+                <!-- Field is "itemId", not "id": DOMPurify's clobbering protection strips any
+                     name/id attribute whose VALUE collides with a form-element property
+                     (id, name, action, method, title, length, ...) — see appPage/script.js. -->
+                <input type="hidden" name="itemId" value="${escapeHtml(String(row.id ?? ""))}" />
                 <button type="submit" class="be-btn be-btn--small">View</button>
               </form>
             </td>

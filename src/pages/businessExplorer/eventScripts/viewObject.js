@@ -5,7 +5,7 @@
 // customObjectDetailView via showViewInModal, so the view doesn't need to re-fetch.
 
 const formData = this.args?.formData ?? {};
-const objectId = formData.id?.[0];
+const objectId = formData.itemId?.[0];
 
 if (!objectId) {
   this.showToast("No object selected.", { variant: "failure" });

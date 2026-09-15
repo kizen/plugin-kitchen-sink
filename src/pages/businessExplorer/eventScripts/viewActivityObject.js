@@ -6,7 +6,7 @@
 // References is fetched best-effort — a failure there still lets the main detail render.
 
 const formData = this.args?.formData ?? {};
-const activityObjectId = formData.id?.[0];
+const activityObjectId = formData.itemId?.[0];
 
 if (!activityObjectId) {
   this.showToast("No activity object selected.", { variant: "failure" });
