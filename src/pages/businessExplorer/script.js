@@ -171,9 +171,9 @@ const TAB_CONFIG = {
       },
       { label: "Status", render: (row) => (row.active ? pill("Active") : pill("Inactive")) },
       { label: "Object", render: (row) => escapeHtml(row.custom_object?.name ?? "—") },
-      { label: "AI Description", render: (row) => escapeHtml(truncate(row.ai_description, 200)) },
+      { label: "AI Description", render: (row) => escapeHtml(truncate(row.ai_description, 80)) },
       {
-        label: "Executions (Active / Paused / Done)",
+        label: "Executions (A / P / D)",
         render: (row) => `${row.number_active ?? 0} / ${row.number_paused ?? 0} / ${row.number_completed ?? 0}`,
       },
       { label: "Created", render: (row) => formatDate(row.created) },
@@ -311,14 +311,14 @@ function renderExplorer(state, data, loadError) {
   } else if (rows.length === 0) {
     body = `<div class="be-empty">No ${escapeHtml(cfg.label.toLowerCase())} found${state.search ? ` for "${escapeHtml(state.search)}"` : ""}.</div>`;
   } else {
-    const thead = `<tr>${cfg.columns.map((c) => `<th>${escapeHtml(c.label)}</th>`).join("")}${cfg.detailScript ? "<th></th>" : ""}</tr>`;
+    const thead = `<tr>${cfg.columns.map((c) => `<th>${escapeHtml(c.label)}</th>`).join("")}${cfg.detailScript ? '<th class="be-table-actions"></th>' : ""}</tr>`;
 
     const tbody = rows
       .map((row) => {
         const cells = cfg.columns.map((c) => `<td>${c.render(row)}</td>`).join("");
         const actionCell = cfg.detailScript
           ? `
-            <td>
+            <td class="be-table-actions">
               <form class="be-inline-form" data-script="${cfg.detailScript}">
                 <!-- Field is "itemId", not "id": DOMPurify's clobbering protection strips any
                      name/id attribute whose VALUE collides with a form-element property
