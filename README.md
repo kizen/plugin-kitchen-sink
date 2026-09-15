@@ -189,16 +189,24 @@ Entries added to an object's settings menu:
   every page of a cursor-paginated endpoint, deliberately skipped here to bound one dispatch's
   request count), and a cursor-paginated executions table. Each execution opens
   **executionDetailView** — meta, variables (normalized from the API's inconsistent response
-  shape), and step history. An Activity Object's References section nests listings per
-  reference type (Automations, Smart Connectors, Dashboards, Homepages, Filter Groups, Toolbar
-  Templates); Automations cross-link into `workflowDetailView` (a modal opened from inside
-  another modal) since this plugin already has that view, but the other five reference types
-  render as plain listings rather than five more net-new detail views.
+  shape, including the `persisted_value`/`variable` nested-map form), and step history.
 
-  Not yet ported from the reference app: the CCDA document viewer, and cross-links from
-  Activity Object references to Smart Connector/Dashboard/Homepage/Filter Group/Toolbar
-  Template detail views (would need building detail views for each against endpoints this
-  plugin doesn't otherwise fetch).
+  Every detail view's cross-references are wired, all the way down: a Custom Object's
+  "# Records" opens **objectRecordsView** (shared with My Objects Block); an Activity Object's
+  References section nests a listing per reference type (Automations, Smart Connectors,
+  Dashboards, Homepages, Filter Groups, Toolbar Templates), each item opening its own detail
+  view — `workflowDetailView`, **smartConnectorDetailView**, **dashboardDetailView** (shared by
+  Dashboards and Homepages, told apart by a `kind` arg), **filterGroupDetailView**, and
+  **toolbarTemplateDetailView**. Several of these are modals opened from inside another modal
+  (e.g. clicking an Automation reference while already viewing an Activity Object) — the same
+  `showViewInModal` primitive every worker context uses, just nested.
+
+  Not yet ported from the reference app: the CCDA document viewer (parses a clinical XML
+  payload off certain execution variables — a distinct, business-specific concern from general
+  Kizen navigation), the "Download Log" button and log-truncation "Show more" toggle on
+  execution detail (both need real DOM APIs — `Blob`/`<a download>`, live click listeners — the
+  worker sandbox doesn't expose), and the "All" executions running-total background computation
+  (would need walking every page of a cursor-paginated endpoint per view load).
 
 ### Route scripts (`src/routeScripts/`)
 

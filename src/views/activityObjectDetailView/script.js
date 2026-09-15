@@ -2,12 +2,12 @@
 //
 // Opened by Business Explorer's viewActivityObject event script, which forwards
 // { object, references } through args (object always present; references is null if that
-// best-effort fetch failed). Display-only, except each referencing Automation, which opens
-// workflowDetailView (eventScripts/viewWorkflowFromReference.js) since this plugin already has
-// that view and its fetch is a single GET. The other five reference types (Smart Connectors,
-// Dashboards, Homepages, Filter Groups, Toolbar Templates) render as plain nested listings —
-// cross-linking those to their own detail views would mean building four more net-new views
-// against endpoints this plugin doesn't fetch anywhere else, kept out of this pass.
+// best-effort fetch failed). Display-only, except each item under References, which opens its
+// own detail view: Automations -> workflowDetailView, Smart Connectors ->
+// smartConnectorDetailView, Dashboards/Homepages -> dashboardDetailView (shared, told apart by a
+// "kind" field), Filter Groups -> filterGroupDetailView, Toolbar Templates ->
+// toolbarTemplateDetailView. Each is a modal opened from inside another modal — the same
+// showViewInModal primitive every worker context uses, nested.
 
 const { object, references } = this.args ?? {};
 
@@ -164,23 +164,73 @@ if (!object) {
           : null,
     );
 
-    const smartConnectorsSubsection = renderUsageSubsection("Smart Connectors", references.smart_connectors, null);
+    const smartConnectorsSubsection = renderUsageSubsection(
+      "Smart Connectors",
+      references.smart_connectors,
+      null,
+      (sc) =>
+        sc.id
+          ? `
+            <form class="aodv-inline-form" data-script="viewSmartConnectorFromReference">
+              <input type="hidden" name="smartConnectorId" value="${escapeHtml(sc.id)}" />
+              <button type="submit" class="aodv-link-btn">${escapeHtml(sc.display_name ?? "Smart Connector")}</button>
+            </form>
+          `
+          : null,
+    );
+
+    const dashboardTitle = (kind) => (d) =>
+      d.id
+        ? `
+          <form class="aodv-inline-form" data-script="viewDashboardFromReference">
+            <input type="hidden" name="dashboardId" value="${escapeHtml(d.id)}" />
+            <input type="hidden" name="kind" value="${escapeHtml(kind)}" />
+            <button type="submit" class="aodv-link-btn">${escapeHtml(d.display_name ?? kind)}</button>
+          </form>
+        `
+        : null;
+
     const dashboardsSubsection = renderUsageSubsection(
       "Dashboards",
       references.dashboards,
       (d) => [{ label: "Dashlets", value: d.dashlets?.length || null }],
+      dashboardTitle("Dashboard"),
     );
     const homepagesSubsection = renderUsageSubsection(
       "Homepages",
       references.homepages,
       (d) => [{ label: "Dashlets", value: d.dashlets?.length || null }],
+      dashboardTitle("Homepage"),
     );
     const filterGroupsSubsection = renderUsageSubsection(
       "Filter Groups",
       references.filter_groups,
       (f) => [{ label: "Object", value: f.custom_object_name }],
+      (f) =>
+        f.id && f.custom_object_id
+          ? `
+            <form class="aodv-inline-form" data-script="viewFilterGroupFromReference">
+              <input type="hidden" name="objectId" value="${escapeHtml(f.custom_object_id)}" />
+              <input type="hidden" name="filterGroupId" value="${escapeHtml(f.id)}" />
+              <button type="submit" class="aodv-link-btn">${escapeHtml(f.display_name ?? "Filter Group")}</button>
+            </form>
+          `
+          : null,
     );
-    const toolbarTemplatesSubsection = renderUsageSubsection("Toolbar Templates", references.toolbar_templates, null);
+    const toolbarTemplatesSubsection = renderUsageSubsection(
+      "Toolbar Templates",
+      references.toolbar_templates,
+      null,
+      (tt) =>
+        tt.id
+          ? `
+            <form class="aodv-inline-form" data-script="viewToolbarTemplateFromReference">
+              <input type="hidden" name="toolbarTemplateId" value="${escapeHtml(tt.id)}" />
+              <button type="submit" class="aodv-link-btn">${escapeHtml(tt.display_name ?? "Toolbar Template")}</button>
+            </form>
+          `
+          : null,
+    );
 
     const nothingElse =
       !references.automations?.length &&

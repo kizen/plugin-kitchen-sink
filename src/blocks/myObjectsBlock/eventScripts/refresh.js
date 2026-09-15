@@ -18,19 +18,12 @@ const entityRecordsPath = (object) =>
     : `/custom-objects/${object.id}/entity-records`;
 
 const getRecordCount = async (object) => {
-  const [response, error] = await this.postWithErrors(entityRecordsPath(object), {
-    page: 1,
-    size: 1,
-  });
+  const query = new URLSearchParams({ page: "1", page_size: "1", ordering: "-created" });
+  const [response, error] = await this.postWithErrors(`${entityRecordsPath(object)}?${query.toString()}`, {});
 
   if (error) return null;
 
-  return (
-    response?.count ??
-    response?.total ??
-    (Array.isArray(response?.results) ? response.results.length : null) ??
-    (Array.isArray(response) ? response.length : null)
-  );
+  return response?.count ?? (Array.isArray(response?.results) ? response.results.length : null);
 };
 
 const renderList = (objects, counts) => `

@@ -15,10 +15,9 @@
 // submit's FormData rides along as `args.formData`, which is how a single event script tells rows
 // apart.
 //
-// NOTE ON GROUND TRUTH: the entity-records request/response shape here (pagination body fields,
-// count field name) is best-effort from documentation, not verified against a live environment.
-// Confirm it with `GET /docs/schema` against your target environment before relying on the counts
-// or record view beyond this demo.
+// entity-records is a POST whose pagination (page, page_size, ordering, search) rides on the
+// query string, not the body — the body is the filter payload, {} for "all records". Confirmed
+// against a working reference implementation (a standalone SPA hitting the same live endpoint).
 
 const escapeHtml = (value) =>
   String(value).replace(
@@ -35,22 +34,15 @@ const entityRecordsPath = (object) =>
     ? `/pipelines/${object.id}/entity-records`
     : `/custom-objects/${object.id}/entity-records`;
 
-// Best-effort record count: asks for a single row and reads whatever count-like field comes
-// back. Returns null (rendered as "—") rather than throwing if the shape doesn't match.
+// Asks for a single row (page_size=1) and reads the page's `count` field — entity-records is
+// ordinary page pagination ({results, count, next, previous}), same as /custom-objects itself.
 const getRecordCount = async (object) => {
-  const [response, error] = await this.postWithErrors(entityRecordsPath(object), {
-    page: 1,
-    size: 1,
-  });
+  const query = new URLSearchParams({ page: "1", page_size: "1", ordering: "-created" });
+  const [response, error] = await this.postWithErrors(`${entityRecordsPath(object)}?${query.toString()}`, {});
 
   if (error) return null;
 
-  return (
-    response?.count ??
-    response?.total ??
-    (Array.isArray(response?.results) ? response.results.length : null) ??
-    (Array.isArray(response) ? response.length : null)
-  );
+  return response?.count ?? (Array.isArray(response?.results) ? response.results.length : null);
 };
 
 const renderList = (objects, counts) => `

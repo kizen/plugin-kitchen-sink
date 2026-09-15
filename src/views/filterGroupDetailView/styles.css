@@ -1,0 +1,50 @@
+/* Kitchen Sink App · View · Filter Group Detail View · styles */
+
+.fgdv-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #4a5660;
+}
+
+.fgdv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+}
+
+.fgdv-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f5f6f7;
+}
+
+.fgdv-label {
+  color: #7e8c98;
+}
+
+.fgdv-empty {
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+}
+
+.fgdv-raw summary {
+  cursor: pointer;
+  color: #4090f7;
+  font-size: 12px;
+}
+
+.fgdv-raw pre {
+  margin-top: 8px;
+  padding: 10px;
+  background: #fafbfa;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 11px;
+}

@@ -14,16 +14,31 @@
   color: #64748b;
 }
 
+.orv-table-scroll {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
 .orv-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
 
+.orv-table th,
 .orv-table td {
   padding: 8px 10px;
   border-bottom: 1px solid #f1f5f9;
   color: #0f172a;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.orv-table th {
+  color: #64748b;
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .orv-empty,

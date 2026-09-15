@@ -2,8 +2,9 @@
 //
 // Opened by Business Explorer's viewObject event script, which forwards the already-fetched
 // object detail through args.object (read here on this.args, same pattern as summaryView).
-// Display-only — ported from the reference SPA's renderObjectDetail, minus its "view records"
-// drill-down and pipeline-stage rendering, kept out of this first minimal slice.
+// Display-only, except "# Records", which opens objectRecordsView (eventScripts/viewRecords.js)
+// — the same view My Objects Block already uses. Ported from the reference SPA's
+// renderObjectDetail.
 
 const { object } = this.args ?? {};
 
@@ -27,6 +28,11 @@ const formatDate = (iso) => {
       });
 };
 
+const humanizeKey = (k) =>
+  String(k)
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
 if (!object) {
   this.outputUI(`<div class="codv-body"><p class="codv-empty">No object was selected.</p></div>`);
 } else {
@@ -39,7 +45,19 @@ if (!object) {
       "Owner",
       object.owner ? escapeHtml(object.owner.display_name ?? object.owner.full_name ?? "—") : "—",
     ],
-    ["# Records", object.number_of_records != null ? String(object.number_of_records) : "—"],
+    [
+      "# Records",
+      object.number_of_records != null
+        ? `
+          <form class="codv-inline-form" data-script="viewRecords">
+            <input type="hidden" name="objectId" value="${escapeHtml(object.id ?? "")}" />
+            <input type="hidden" name="objectType" value="${escapeHtml(object.object_type ?? "standard")}" />
+            <input type="hidden" name="objectName" value="${escapeHtml(object.name ?? object.entity_name ?? "Object")}" />
+            <button type="submit" class="codv-link-btn">${escapeHtml(object.number_of_records)}</button>
+          </form>
+        `
+        : "—",
+    ],
     ["Allow Relations", object.allow_relations ? "Yes" : "No"],
     ["Allow On Forms", object.allow_on_forms ? "Yes" : "No"],
     ["Created", formatDate(object.created)],
@@ -92,12 +110,69 @@ if (!object) {
     </div>
   `;
 
+  const isPipeline = object.object_type === "pipeline";
+
+  const pipelineStagesSection = isPipeline
+    ? (() => {
+        const stages = (object.pipeline?.stages ?? []).slice().sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        return `
+          <div class="codv-section">
+            <h4>Pipeline Stages${stages.length ? ` (${stages.length})` : ""}</h4>
+            ${
+              stages.length
+                ? `<ul class="codv-chip-list">${stages
+                    .map(
+                      (s, i) => `
+                        <li class="codv-chip">
+                          <strong>${escapeHtml(s.name ?? `Stage ${i + 1}`)}</strong>
+                          <div class="codv-stat-row">
+                            ${s.status ? `<span class="codv-stat-chip"><strong>Status:</strong> ${escapeHtml(humanizeKey(s.status))}</span>` : ""}
+                            ${
+                              s.percentage_chance_to_close != null
+                                ? `<span class="codv-stat-chip"><strong>Chance to Close:</strong> ${escapeHtml(s.percentage_chance_to_close)}%</span>`
+                                : ""
+                            }
+                          </div>
+                        </li>
+                      `,
+                    )
+                    .join("")}</ul>`
+                : `<p class="codv-empty">No pipeline stages returned by the API.</p>`
+            }
+          </div>
+        `;
+      })()
+    : "";
+
+  const layouts = object.record_layouts ?? [];
+  const layoutsSection = layouts.length
+    ? `<div class="codv-section"><h4>Record Layouts (${layouts.length})</h4><p>${escapeHtml(layouts.map((l) => l.name).join(", "))}</p></div>`
+    : "";
+
+  const pipelineReasonsSection = isPipeline
+    ? (() => {
+        const lost = (object.reasons_lost ?? []).map((r) => r.name).filter(Boolean);
+        const disqualified = (object.reasons_disqualified ?? []).map((r) => r.name).filter(Boolean);
+        if (!lost.length && !disqualified.length) return "";
+        return `
+          <div class="codv-section">
+            <h4>Pipeline Reasons</h4>
+            ${lost.length ? `<p><strong>Lost:</strong> ${escapeHtml(lost.join(", "))}</p>` : ""}
+            ${disqualified.length ? `<p><strong>Disqualified:</strong> ${escapeHtml(disqualified.join(", "))}</p>` : ""}
+          </div>
+        `;
+      })()
+    : "";
+
   this.outputUI(`
     <div class="codv-body">
       <div class="codv-grid">${metaRows}</div>
       ${descriptionSection}
+      ${pipelineStagesSection}
       ${relatedSection}
       ${actionsSection}
+      ${layoutsSection}
+      ${pipelineReasonsSection}
       <details class="codv-raw">
         <summary>Raw response JSON</summary>
         <pre>${escapeHtml(JSON.stringify(object, null, 2))}</pre>
