@@ -157,14 +157,33 @@ Entries added to an object's settings menu:
   Runs with object context only (no current record) and acts through side effects; its
   return value is discarded.
 
-### Pages (`src/pages/appPage/`)
+### Pages (`src/pages/`)
 
-A routable full-page app page at `/plugins/kitchen_sink/app_page`, also exposed as a
-toolbar entry (`is_toolbar_item`). Demonstrates query args on `this.args`, form and button
-event scripts, and starting a user-level OAuth flow: `eventScripts/authorizeGoogle.js` calls
-`this.authorize()`, which opens the flow in a new tab; the outcome shows on the plugin's
-marketplace Authorization panel. (Page `callback.js` handlers are out of scope for this
-plugin — they belong to iframe-embedded flows that end at `/plugins/callback`.)
+- **appPage** — a routable full-page app page at `/plugins/kitchen_sink/app_page`, also
+  exposed as a toolbar entry (`is_toolbar_item`). Demonstrates query args on `this.args`,
+  form and button event scripts, and starting a user-level OAuth flow:
+  `eventScripts/authorizeGoogle.js` calls `this.authorize()`, which opens the flow in a new
+  tab; the outcome shows on the plugin's marketplace Authorization panel. (Page `callback.js`
+  handlers are out of scope for this plugin — they belong to iframe-embedded flows that end
+  at `/plugins/callback`.)
+- **businessExplorer** — a live 4-tab browser (Custom Objects, Activities, Activity Objects,
+  Agentic Workflows) reading directly from the Kizen REST API, with search, ordering, and
+  pagination per tab, plus a click-through detail modal for three of the four
+  (`customObjectDetailView`, `activityObjectDetailView`, `workflowDetailView` — Activities has
+  no per-row detail, matching the reference app). Activity Objects has no dedicated list
+  endpoint, so it's derived client-side by sampling recent scheduled activities and grouping
+  them by `activity_object` (see `fetchTabData` in `script.js`).
+
+  Ported from a standalone reference SPA (`~/kizen-demo-spa`) that talked to the Kizen API
+  through manually-entered credentials and its own proxy server — neither is needed inside a
+  plugin, since the engine already authenticates every request for the installed business.
+  Every `data-script` dispatch is a fresh, stateless worker, so tab/search/ordering/page are
+  threaded through hidden form fields on every render rather than kept in a variable — the
+  render/fetch logic is duplicated across `script.js` and each of `eventScripts/search.js`,
+  `paginate.js`, and `switchTab.js`, the same pattern `dashboardBlock`'s `refresh.js` already
+  uses. Not yet ported from the reference app: the CCDA document viewer and the deeper
+  cross-linked "references" drill-downs (workflow executions list, per-reference-type
+  listings).
 
 ### Route scripts (`src/routeScripts/`)
 

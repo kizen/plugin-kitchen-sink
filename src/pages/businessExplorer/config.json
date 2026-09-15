@@ -1,0 +1,7 @@
+{
+  "name": "Business Explorer",
+  "api_name": "business_explorer",
+  "is_toolbar_item": true,
+  "toolbar_icon": "globe",
+  "toolbar_color": "#4090f7"
+}

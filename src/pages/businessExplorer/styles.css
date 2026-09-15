@@ -1,0 +1,189 @@
+/* Kitchen Sink App · Page · Business Explorer · styles */
+
+/*
+ * Color tokens ported from the reference SPA (~/kizen-demo-spa), which reads them directly from
+ * @kizen/kds's theme.ts rather than approximating them.
+ */
+.be-page {
+  --be-bg: #f8faff;
+  --be-panel: #ffffff;
+  --be-border: #d8dde1;
+  --be-text: #4a5660;
+  --be-muted: #7e8c98;
+  --be-accent: #4090f7;
+  --be-danger: #ff3d30;
+  --be-danger-bg: #ffc9c9;
+
+  font-family: "Proxima Nova", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--be-text);
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.be-header h1 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.be-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--be-border);
+}
+
+.be-tab {
+  padding: 8px 14px;
+  border: none;
+  background: transparent;
+  color: var(--be-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.be-tab--active {
+  color: var(--be-accent);
+  border-bottom-color: var(--be-accent);
+}
+
+.be-hint {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--be-muted);
+}
+
+.be-muted {
+  color: var(--be-muted);
+  font-size: 13px;
+  margin: 0 0 16px;
+}
+
+.be-muted code {
+  background: #fafbfa;
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.be-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.be-input,
+.be-select {
+  padding: 6px 10px;
+  border: 1px solid var(--be-border);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.be-input {
+  flex: 1;
+  min-width: 160px;
+}
+
+.be-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--be-accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.be-btn--small {
+  padding: 4px 10px;
+}
+
+.be-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.be-inline-form {
+  margin: 0;
+  display: inline-block;
+}
+
+.be-table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--be-border);
+  border-radius: 8px;
+}
+
+.be-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--be-panel);
+}
+
+.be-table th,
+.be-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--be-border);
+  white-space: nowrap;
+}
+
+.be-table th {
+  color: var(--be-muted);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.be-table code {
+  background: #fafbfa;
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.be-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #eef4fe;
+  color: var(--be-accent);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.be-empty,
+.be-error {
+  padding: 24px;
+  text-align: center;
+  color: var(--be-muted);
+  border: 1px solid var(--be-border);
+  border-radius: 8px;
+}
+
+.be-error {
+  color: var(--be-danger);
+  background: var(--be-danger-bg);
+  border-color: var(--be-danger);
+}
+
+.be-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.be-pager-info {
+  color: var(--be-muted);
+}
+
+.be-pager-actions {
+  display: flex;
+  gap: 8px;
+}
