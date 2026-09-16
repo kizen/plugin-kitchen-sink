@@ -1,0 +1,126 @@
+/* Kitchen Sink App · Block · My Objects Block · styles */
+
+/* Engine-scoped (@scope) at inject time — write plain selectors. Each block ships its own
+ * styles.css; there is no cross-block shared stylesheet.
+ */
+
+.ks-block {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  overflow: auto;
+}
+
+.ks-block__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ks-block__badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.ks-block__badge--accent {
+  background: #34d399;
+}
+
+.ks-block__badge--error {
+  background: #f87171;
+}
+
+.ks-block__title {
+  font-weight: 600;
+}
+
+.ks-block__desc {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+  color: #cbd5e1;
+}
+
+.ks-block__desc code {
+  background: rgba(148, 163, 184, 0.2);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.ks-block__list {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ks-block__list-form {
+  margin: 0;
+}
+
+.ks-block__list-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(148, 163, 184, 0.1);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ks-block__list-item:hover {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.ks-block__list-name {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.ks-block__list-meta {
+  font-size: 12px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.ks-block__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ks-block__btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.ks-block__btn:hover {
+  background: #7dd3fc;
+}

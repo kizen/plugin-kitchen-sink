@@ -1,0 +1,33 @@
+{
+  "name": "Get Ticker Price",
+  "plugin_description": "Kitchen Sink demo automation step. Fetches a ticker's current market price from a free API.",
+  "action_description": "Calls Yahoo Finance's chart API directly for the given ticker symbol and writes its regular market price to the target output.",
+  "action_type": "kitchen_sink_get_ticker_price",
+  "runtime": "python 3.13",
+  "inputs": [
+    {
+      "name": "ticker",
+      "label": "Ticker",
+      "data_type": "string",
+      "required": true,
+      "input_source": "variable",
+      "hint_field_name": "ticker",
+      "hint_related_object_field_name": null,
+      "script_alias": "ticker"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "target",
+      "label": "Ticker Price",
+      "data_type": "number",
+      "required": true,
+      "input_source": "object_field",
+      "hint_field_name": "target",
+      "hint_related_object_field_name": null,
+      "script_alias": "target",
+      "conflict_resolution": "overwrite",
+      "create_field_options": false
+    }
+  ]
+}

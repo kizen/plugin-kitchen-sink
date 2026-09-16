@@ -47,7 +47,7 @@ flows through `data-script` attributes — there is no `addEventListener`.
 
 ### kizen.json — services and manifest
 
-Declares four services, one per auth shape:
+Declares five services across four auth shapes:
 
 | Service           | auth_type                 | auth_level | Consumed by                                                                             |
 | ----------------- | ------------------------- | ---------- | --------------------------------------------------------------------------------------- |
@@ -55,6 +55,7 @@ Declares four services, one per auth shape:
 | `google_business` | oauth                     | business   | calendar source, setup assistant async selects                                          |
 | `echo_basic`      | basic_auth_token_provided | global     | performActionDemo action                                                                |
 | `dad_jokes`       | no_auth                   | —          | dadJokeWriteback and failureModes actions, detailsGate route script, scriptWidget frame |
+| `yahoo_finance`   | no_auth                   | —          | stockPriceWriteback action                                                              |
 
 Also demonstrates `base_config.secrets`, top-level `required_entitlement`, and an install
 config sourced entirely from the setup assistant (`config_template` is empty).
@@ -67,6 +68,9 @@ surfaces below):
 - **dadJokeWriteback** — record writeback: the overwrite shape (`{name, value}`) and the
   append shape (`{name, add_values}`), plus calling an external API through the service
   proxy with `this.getServiceUrl()`.
+- **stockPriceWriteback** — same writeback shapes as dadJokeWriteback, but fetches a ticker's
+  current price from the `yahoo_finance` service instead. Reads the ticker symbol from the
+  record's `ticker` field, falling back to AAPL if it's blank.
 - **relationshipAddOverride** — replaces the standard "Add Record" modal on a relationship
   field. Documents the return-value contract: return the new record's id as a non-empty
   string, or undefined to do nothing.
@@ -85,6 +89,9 @@ Code steps a workflow author drops into an automation:
 - **secretApiCall** — reads the namespaced `api_key` secret, builds a Basic auth header,
   and demonstrates 429 retry with exponential backoff and Retry-After handling.
 - **dadJoke** — the simplest possible step: one GET, one output.
+- **getTickerPrice** — same shape as dadJoke: one GET (Yahoo Finance's chart API, no auth) for
+  a given ticker's current market price, one numeric output. Takes a `ticker` input
+  (`input_source: "variable"`).
 - **failOnPurpose** — always fails: plain exception, unhandled HTTP error, or timeout.
 
 Python steps call external APIs directly with `requests` — they have no access to the
@@ -150,14 +157,56 @@ Entries added to an object's settings menu:
   Runs with object context only (no current record) and acts through side effects; its
   return value is discarded.
 
-### Pages (`src/pages/appPage/`)
+### Pages (`src/pages/`)
 
-A routable full-page app page at `/plugins/kitchen_sink/app_page`, also exposed as a
-toolbar entry (`is_toolbar_item`). Demonstrates query args on `this.args`, form and button
-event scripts, and starting a user-level OAuth flow: `eventScripts/authorizeGoogle.js` calls
-`this.authorize()`, which opens the flow in a new tab; the outcome shows on the plugin's
-marketplace Authorization panel. (Page `callback.js` handlers are out of scope for this
-plugin — they belong to iframe-embedded flows that end at `/plugins/callback`.)
+- **appPage** — a routable full-page app page at `/plugins/kitchen_sink/app_page`, also
+  exposed as a toolbar entry (`is_toolbar_item`). Demonstrates query args on `this.args`,
+  form and button event scripts, and starting a user-level OAuth flow:
+  `eventScripts/authorizeGoogle.js` calls `this.authorize()`, which opens the flow in a new
+  tab; the outcome shows on the plugin's marketplace Authorization panel. (Page `callback.js`
+  handlers are out of scope for this plugin — they belong to iframe-embedded flows that end
+  at `/plugins/callback`.)
+- **businessExplorer** — a live 4-tab browser (Custom Objects, Activities, Activity Objects,
+  Agentic Workflows) reading directly from the Kizen REST API, with search, ordering, and
+  pagination per tab, plus a click-through detail modal for three of the four
+  (`customObjectDetailView`, `activityObjectDetailView`, `workflowDetailView` — Activities has
+  no per-row detail, matching the reference app). Activity Objects has no dedicated list
+  endpoint, so it's derived client-side by sampling recent scheduled activities and grouping
+  them by `activity_object` (see `fetchTabData` in `script.js`).
+
+  Ported from a standalone reference SPA (`~/kizen-demo-spa`) that talked to the Kizen API
+  through manually-entered credentials and its own proxy server — neither is needed inside a
+  plugin, since the engine already authenticates every request for the installed business.
+  Every `data-script` dispatch is a fresh, stateless worker, so tab/search/ordering/page are
+  threaded through hidden form fields on every render rather than kept in a variable — the
+  render/fetch logic is duplicated across `script.js` and each of `eventScripts/search.js`,
+  `paginate.js`, and `switchTab.js`, the same pattern `dashboardBlock`'s `refresh.js` already
+  uses.
+
+  A workflow's Executions row opens **workflowExecutionsView** — status quick filters (with
+  count badges for the three statuses the workflow's own summary already knows: active,
+  paused, completed; the rest filter but show no count, since a true "All" total needs walking
+  every page of a cursor-paginated endpoint, deliberately skipped here to bound one dispatch's
+  request count), and a cursor-paginated executions table. Each execution opens
+  **executionDetailView** — meta, variables (normalized from the API's inconsistent response
+  shape, including the `persisted_value`/`variable` nested-map form), and step history.
+
+  Every detail view's cross-references are wired, all the way down: a Custom Object's
+  "# Records" opens **objectRecordsView** (shared with My Objects Block); an Activity Object's
+  References section nests a listing per reference type (Automations, Smart Connectors,
+  Dashboards, Homepages, Filter Groups, Toolbar Templates), each item opening its own detail
+  view — `workflowDetailView`, **smartConnectorDetailView**, **dashboardDetailView** (shared by
+  Dashboards and Homepages, told apart by a `kind` arg), **filterGroupDetailView**, and
+  **toolbarTemplateDetailView**. Several of these are modals opened from inside another modal
+  (e.g. clicking an Automation reference while already viewing an Activity Object) — the same
+  `showViewInModal` primitive every worker context uses, just nested.
+
+  Not yet ported from the reference app: the CCDA document viewer (parses a clinical XML
+  payload off certain execution variables — a distinct, business-specific concern from general
+  Kizen navigation), the "Download Log" button and log-truncation "Show more" toggle on
+  execution detail (both need real DOM APIs — `Blob`/`<a download>`, live click listeners — the
+  worker sandbox doesn't expose), and the "All" executions running-total background computation
+  (would need walking every page of a cursor-paginated endpoint per view load).
 
 ### Route scripts (`src/routeScripts/`)
 

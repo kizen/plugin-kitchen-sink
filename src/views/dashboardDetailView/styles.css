@@ -1,0 +1,72 @@
+/* Kitchen Sink App · View · Dashboard Detail View · styles */
+
+.ddv-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #4a5660;
+}
+
+.ddv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+}
+
+.ddv-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f5f6f7;
+}
+
+.ddv-label {
+  color: #7e8c98;
+}
+
+.ddv-section h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.ddv-chip-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ddv-chip {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #f8faff;
+  border: 1px solid #d8dde1;
+  font-weight: 600;
+}
+
+.ddv-empty {
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+}
+
+.ddv-raw summary {
+  cursor: pointer;
+  color: #4090f7;
+  font-size: 12px;
+}
+
+.ddv-raw pre {
+  margin-top: 8px;
+  padding: 10px;
+  background: #fafbfa;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 11px;
+}

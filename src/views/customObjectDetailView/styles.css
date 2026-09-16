@@ -1,0 +1,116 @@
+/* Kitchen Sink App · View · Custom Object Detail View · styles */
+
+.codv-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #4a5660;
+}
+
+.codv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+}
+
+.codv-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f5f6f7;
+}
+
+.codv-label {
+  color: #7e8c98;
+}
+
+.codv-value code {
+  background: #fafbfa;
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.codv-inline-form {
+  margin: 0;
+  display: inline-block;
+}
+
+.codv-link-btn {
+  border: none;
+  background: none;
+  color: #4090f7;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.codv-link-btn:hover {
+  text-decoration: underline;
+}
+
+.codv-stat-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.codv-stat-chip {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #eef4fe;
+  color: #4090f7;
+  font-size: 12px;
+}
+
+.codv-section h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.codv-chip-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.codv-chip {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #f8faff;
+  border: 1px solid #d8dde1;
+}
+
+.codv-chip p {
+  margin: 4px 0 0;
+  color: #7e8c98;
+}
+
+.codv-empty {
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+}
+
+.codv-raw summary {
+  cursor: pointer;
+  color: #4090f7;
+  font-size: 12px;
+}
+
+.codv-raw pre {
+  margin-top: 8px;
+  padding: 10px;
+  background: #fafbfa;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 11px;
+}
