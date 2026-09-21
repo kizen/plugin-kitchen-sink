@@ -34,6 +34,29 @@
       "allow_multiple": true,
       "when": "Boolean({{enableUserCalendars}})",
       "tooltip": "Fetched through the google_user service proxy with your own token — authorize the service above first."
+    },
+    {
+      "type": "description",
+      "key": "userRadioSecretIntro",
+      "content": "`radio` and `api_key` both work here too. `api_key` still writes to Integration Secrets, which are **business-scoped**, not per-user — if more than one team member fills in the field below, whoever saves last wins for the whole business. There is no per-user secret storage."
+    },
+    {
+      "type": "radio",
+      "label": "Notification Style",
+      "key": "userNotificationStyle",
+      "default": "compact",
+      "options": [
+        { "label": "Compact", "value": "compact" },
+        { "label": "Detailed", "value": "detailed" }
+      ]
+    },
+    {
+      "type": "api_key",
+      "label": "Personal Demo API Key",
+      "key": "userDemoApiKey",
+      "secret": "user_demo_secret",
+      "required": false,
+      "tooltip": "Writes to the business-wide user_demo_secret Integration Secret — declared separately from the business assistant's own api_key field purely to keep this example isolated."
     }
   ]
 }

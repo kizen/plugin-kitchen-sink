@@ -19,7 +19,7 @@
   },
   "config_template": {},
   "base_config": {
-    "secrets": ["api_key"]
+    "secrets": ["api_key", "user_demo_secret"]
   },
   "services": [
     {

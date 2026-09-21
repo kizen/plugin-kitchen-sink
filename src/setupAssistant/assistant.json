@@ -115,6 +115,49 @@
       ]
     },
     {
+      "type": "container",
+      "columns": 1,
+      "label": "Radio & Secret Fields",
+      "key": "radioSecretSection",
+      "fields": [
+        {
+          "type": "description",
+          "key": "radioSecretIntro",
+          "content": "Two more field types. `radio` renders every option as a segmented control instead of a dropdown, and any option can carry its own `disabled` expression. `api_key` writes straight to Integration Secrets — its value never reaches plugin config, in any form, at any point."
+        },
+        {
+          "type": "radio",
+          "label": "Sync Mode",
+          "key": "demoSyncMode",
+          "required": true,
+          "default": "scheduled",
+          "tooltip": "default names the option shown selected before any answer is saved — unlike select's default, which is only a validation-time fallback.",
+          "options": [
+            { "label": "Manual", "value": "manual" },
+            { "label": "Scheduled", "value": "scheduled" },
+            {
+              "label": "Realtime",
+              "value": "realtime",
+              "disabled": "{{entitlement.beta}} !== true"
+            }
+          ]
+        },
+        {
+          "type": "description",
+          "key": "radioDisabledNote",
+          "content": "**Realtime** above is greyed out and can't be picked — its `disabled` expression reads `{{entitlement.beta}}`, which almost no business has. Point a real plugin's option `disabled` at a real entitlement, or at `{{plan.<type>.<key>}}`, to gate a choice by what the business is actually entitled to."
+        },
+        {
+          "type": "api_key",
+          "label": "Demo Service API Key",
+          "key": "demoApiKey",
+          "secret": "api_key",
+          "required": false,
+          "tooltip": "Fills this plugin's own `api_key` Integration Secret — the same row the Header Echo service and the Secret API Call automation step already read. Once it has a value the field renders read-only and masked; it is never written to plugin config."
+        }
+      ]
+    },
+    {
       "type": "boolean",
       "label": "Configure a Demo Object?",
       "key": "configureDemoObject",
