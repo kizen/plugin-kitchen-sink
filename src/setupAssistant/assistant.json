@@ -123,7 +123,7 @@
         {
           "type": "description",
           "key": "radioSecretIntro",
-          "content": "Two more field types. `radio` renders every option as a segmented control instead of a dropdown, and any option can carry its own `disabled` expression. `api_key` writes straight to Integration Secrets — its value never reaches plugin config, in any form, at any point."
+          "content": "`radio` shows options as a segmented control. `api_key` saves to Integration Secrets, never to plugin config."
         },
         {
           "type": "radio",
@@ -131,7 +131,6 @@
           "key": "demoSyncMode",
           "required": true,
           "default": "scheduled",
-          "tooltip": "default names the option shown selected before any answer is saved — unlike select's default, which is only a validation-time fallback.",
           "options": [
             { "label": "Manual", "value": "manual" },
             { "label": "Scheduled", "value": "scheduled" },
@@ -145,7 +144,7 @@
         {
           "type": "description",
           "key": "radioDisabledNote",
-          "content": "**Realtime** above is greyed out and can't be picked — its `disabled` expression reads `{{entitlement.beta}}`, which almost no business has. Point a real plugin's option `disabled` at a real entitlement, or at `{{plan.<type>.<key>}}`, to gate a choice by what the business is actually entitled to."
+          "content": "Options can be disabled with an expression. **Realtime** uses `{{entitlement.beta}}`."
         },
         {
           "type": "api_key",
@@ -153,7 +152,7 @@
           "key": "demoApiKey",
           "secret": "api_key",
           "required": false,
-          "tooltip": "Fills this plugin's own `api_key` Integration Secret — the same row the Header Echo service and the Secret API Call automation step already read. Once it has a value the field renders read-only and masked; it is never written to plugin config."
+          "tooltip": "Saved to this plugin's `api_key` Integration Secret."
         }
       ]
     },

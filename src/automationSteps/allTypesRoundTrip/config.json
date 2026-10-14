@@ -1,8 +1,6 @@
 {
   "name": "All Types Round Trip",
-  "plugin_description": "Kitchen Sink demo automation step covering every automation-step data_type the plugin engine supports.",
   "action_description": "Reads one input of each supported data_type, logs the Python type it deserialized to, and writes it straight back out on the matching output. Scalar types (string, number, boolean, date, datetime, uuid) round-trip unmodified. Reference types (employee, entity) and phone_number are asymmetric: the script sees a scalar (an id string / E.164 string), but the write path re-hydrates a record or re-validates — so the value only survives if it is a valid id/number for the target field.",
-  "action_type": "kitchen_sink_all_types_round_trip",
   "runtime": "python 3.13",
   "inputs": [
     {
@@ -12,18 +10,16 @@
       "required": true,
       "input_source": "object_field",
       "hint_field_name": "target",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_string"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_email",
       "label": "Email In",
-      "data_type": "email",
+      "data_type": "string",
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "email",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_email"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_boolean",
@@ -32,8 +28,7 @@
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "is_active",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_boolean"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_number",
@@ -42,8 +37,7 @@
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "amount",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_number"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_date",
@@ -52,8 +46,7 @@
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "start_date",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_date"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_datetime",
@@ -62,8 +55,7 @@
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "last_synced_at",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_datetime"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_phone_number",
@@ -72,8 +64,7 @@
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "business_phone",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_phone_number"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_employee",
@@ -82,8 +73,7 @@
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "owner",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_employee"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_entity",
@@ -92,8 +82,7 @@
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "related_contact",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_entity"
+      "hint_related_object_field_name": null
     },
     {
       "name": "input_uuid",
@@ -102,8 +91,7 @@
       "required": false,
       "input_source": "variable",
       "hint_field_name": "external_id",
-      "hint_related_object_field_name": null,
-      "script_alias": "input_uuid"
+      "hint_related_object_field_name": null
     }
   ],
   "outputs": [
@@ -115,19 +103,17 @@
       "input_source": "object_field",
       "hint_field_name": "target",
       "hint_related_object_field_name": null,
-      "script_alias": "output_string",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     },
     {
       "name": "output_email",
       "label": "Email Out",
-      "data_type": "email",
+      "data_type": "string",
       "required": false,
       "input_source": "object_field",
       "hint_field_name": "email",
       "hint_related_object_field_name": null,
-      "script_alias": "output_email",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     },
@@ -139,7 +125,6 @@
       "input_source": "object_field",
       "hint_field_name": "is_active",
       "hint_related_object_field_name": null,
-      "script_alias": "output_boolean",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     },
@@ -151,7 +136,6 @@
       "input_source": "object_field",
       "hint_field_name": "amount",
       "hint_related_object_field_name": null,
-      "script_alias": "output_number",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     },
@@ -163,7 +147,6 @@
       "input_source": "object_field",
       "hint_field_name": "start_date",
       "hint_related_object_field_name": null,
-      "script_alias": "output_date",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     },
@@ -175,7 +158,6 @@
       "input_source": "object_field",
       "hint_field_name": "last_synced_at",
       "hint_related_object_field_name": null,
-      "script_alias": "output_datetime",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     },
@@ -187,7 +169,6 @@
       "input_source": "object_field",
       "hint_field_name": "business_phone",
       "hint_related_object_field_name": null,
-      "script_alias": "output_phone_number",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     },
@@ -199,7 +180,6 @@
       "input_source": "object_field",
       "hint_field_name": "owner",
       "hint_related_object_field_name": null,
-      "script_alias": "output_employee",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     },
@@ -211,7 +191,6 @@
       "input_source": "object_field",
       "hint_field_name": "related_contact",
       "hint_related_object_field_name": null,
-      "script_alias": "output_entity",
       "conflict_resolution": "update_if_blank",
       "create_field_options": false
     },
@@ -223,7 +202,6 @@
       "input_source": "object_field",
       "hint_field_name": "external_id",
       "hint_related_object_field_name": null,
-      "script_alias": "output_uuid",
       "conflict_resolution": "overwrite",
       "create_field_options": false
     }
