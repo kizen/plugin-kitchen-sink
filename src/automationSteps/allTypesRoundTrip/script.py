@@ -1,7 +1,8 @@
 # Kitchen Sink App · Automation Step · All Types Round Trip
 #
-# Exercises every `data_type` an automation-step input/output supports (10 in total):
-#     string | boolean | number | date | datetime | email | phone_number | employee | entity | uuid
+# Exercises every `data_type` an automation-step input/output supports (9 in total):
+#     string | boolean | number | date | datetime | phone_number | employee | entity | uuid
+# There is no `email` type: input_email/output_email are `string` params hinted at an email field.
 #
 # For each input the script:
 #   1. reads the value
