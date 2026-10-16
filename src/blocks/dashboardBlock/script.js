@@ -1,6 +1,6 @@
 // Kitchen Sink App · Block · Dashboard Block
 //
-// A block is a plugin-provided dashlet an admin drops onto a Dashboard, Homepage, Chart
+// A block is an app-provided dashlet an admin drops onto a Dashboard, Homepage, Chart
 // Group, or a record page. Which surfaces offer a given
 // block is the `types` array in config.json — this one is `["dashboards"]`, so it only appears
 // in the Dashboard block picker.

@@ -4,7 +4,7 @@
 // counterpart to the read-only this.userConfig getter (which reflects the user setup assistant).
 // The bucket is per-user AND per-component, keyed by pluginComponentId under
 // /employee/mine/configs/plugins/{pluginId}. setUserConfig shallow-merges, so you can update one
-// key without clobbering the rest. Both require an installed plugin component.
+// key without clobbering the rest. Both require an installed app component.
 //
 // To make persistence obvious, this bumps a runCount each run and lets you edit a note.
 

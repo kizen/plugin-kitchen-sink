@@ -4,7 +4,7 @@
 
 import requests
 
-# Calling directly, not through the plugin-controlled proxy service
+# Calling directly, not through the app-controlled proxy service
 response = requests.get("https://icanhazdadjoke.com/", headers={"Accept": "text/plain"}, timeout=10)
 
 if response.status_code != 200:

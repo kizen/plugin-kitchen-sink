@@ -15,7 +15,7 @@
     {
       "type": "description",
       "key": "assistantIntro",
-      "content": "This assistant demonstrates **every setup-assistant field type**. The values you save here become the plugin's install config: scripts read them as `this.config.<key>`, and artifact configs can gate themselves with `\"when\": \"Boolean({{config.<key>}})\"` conditions. Description fields like this one support **markdown**."
+      "content": "This assistant demonstrates **every setup-assistant field type**. The values you save here become the app's install config: scripts read them as `this.config.<key>`, and artifact configs can gate themselves with `\"when\": \"Boolean({{config.<key>}})\"` conditions. Description fields like this one support **markdown**."
     },
     {
       "type": "container",
@@ -28,21 +28,21 @@
           "label": "Enable Floating Frames",
           "key": "enableFloatingFrames",
           "default": true,
-          "tooltip": "Reserved for the floating-frame surfaces of this plugin."
+          "tooltip": "Reserved for the floating-frame surfaces of this app."
         },
         {
           "type": "boolean",
           "label": "Enable Data Adornments",
           "key": "enableAdornments",
           "default": true,
-          "tooltip": "Reserved for the data-adornment surfaces of this plugin."
+          "tooltip": "Reserved for the data-adornment surfaces of this app."
         },
         {
           "type": "boolean",
           "label": "Enable Object Settings Item",
           "key": "enableObjectSettingsItem",
           "default": true,
-          "tooltip": "Reserved for the object-settings surface of this plugin."
+          "tooltip": "Reserved for the object-settings surface of this app."
         },
         {
           "type": "boolean",
