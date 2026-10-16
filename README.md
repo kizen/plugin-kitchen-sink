@@ -1,11 +1,11 @@
 # Kitchen Sink
 
-A Kizen plugin that exercises every surface the plugin engine supports. It serves two
+A Kizen app that exercises every surface the app engine supports. It serves two
 audiences:
 
 - **QA** installs it once and can smoke-test every engine surface, including deliberate
   failure paths.
-- **Plugin developers** can read it as a working, commented reference for each capability.
+- **App developers** can read it as a working, commented reference for each capability.
   Every artifact's comments document the engine contract it relies on — argument shapes,
   return-value rules, and the gotchas that aren't obvious from a first read.
 
@@ -30,14 +30,14 @@ flows through `data-script` attributes — there is no `addEventListener`.
 
 ## Setup
 
-1. **Install** the plugin from the marketplace (requires the developer program entitlement).
+1. **Install** the app from the marketplace (requires the developer program entitlement).
 2. **Secret**: set the `api_key` integration secret. Any value works — it feeds the
    `echo_basic` service and the `secretApiCall` automation step, both of which call
    httptest (hypothesis.sh/api/httptest), which just echoes the resulting Authorization header back.
 3. **Google OAuth**: the `google_user` and `google_business` services declare encrypted
    client credentials. The committed values are placeholders; the OAuth-dependent surfaces
    (authorize flows, calendar source, async selects) only work once real credentials are
-   encrypted for this plugin and published.
+   encrypted for this app and published.
 4. **Setup assistant**: the business setup assistant saves the install config. Its feature
    toggles gate several surfaces (`enableFloatingFrames`, `enableAdornments`,
    `enableObjectSettingsItem`, `enableContextDump`, `enableBlocks`) via `when` conditions,
@@ -92,11 +92,11 @@ Python steps call external APIs directly with `requests` — they have no access
 
 ### Blocks (`src/blocks/`)
 
-Plugin-provided dashlets, one per block type plus a communication demo:
+App-provided dashlets, one per block type plus a communication demo:
 
 - **dashboardBlock** — the fully-specified reference: sizing config, `when` gating, styles,
   and event scripts that repaint in place and log the worker context.
-- **homepageBlock** — opens one of this plugin's views with `showViewInModal` and reads the
+- **homepageBlock** — opens one of this app's views with `showViewInModal` and reads the
   submitted form values back.
 - **chartGroupBlock** — reads install config (`this.config.contextValue`) into its markup.
 - **recordBlock** — minimal config, documenting the packager defaults.
@@ -155,9 +155,9 @@ Entries added to an object's settings menu:
 A routable full-page app page at `/plugins/kitchen_sink/app_page`, also exposed as a
 toolbar entry (`is_toolbar_item`). Demonstrates query args on `this.args`, form and button
 event scripts, and starting a user-level OAuth flow: `eventScripts/authorizeGoogle.js` calls
-`this.authorize()`, which opens the flow in a new tab; the outcome shows on the plugin's
+`this.authorize()`, which opens the flow in a new tab; the outcome shows on the app's
 marketplace Authorization panel. (Page `callback.js` handlers are out of scope for this
-plugin — they belong to iframe-embedded flows that end at `/plugins/callback`.)
+app — they belong to iframe-embedded flows that end at `/plugins/callback`.)
 
 ### Route scripts (`src/routeScripts/`)
 

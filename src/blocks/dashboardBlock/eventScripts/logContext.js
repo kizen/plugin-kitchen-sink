@@ -1,7 +1,7 @@
 // Kitchen Sink App · Block · Dashboard Block · logContext
 //
-// A block worker is a full plugin worker context. `this.location` (the partial window.location
-// every plugin script gets), `this.config` (install config from the setup
+// A block worker is a full app worker context. `this.location` (the partial window.location
+// every app script gets), `this.config` (install config from the setup
 // assistant), and `this.userConfig` (per-user config) are all available here - the same context
 // actions and route scripts receive.
 

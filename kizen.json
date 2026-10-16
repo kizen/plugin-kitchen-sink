@@ -1,10 +1,11 @@
 {
   "name": "Kitchen Sink",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "published": true,
   "api_name": "kitchen_sink",
   "external_link": "https://developer.kizen.com",
-  "description": "Exercises every surface the Kizen plugin engine supports: actions, Python automation steps, floating frames, pages, blocks, toolbar items, data adornments, object settings items, calendar sources, route scripts, views, and both setup assistants.\n\nBuilt for two audiences. QA installs it to smoke-test engine changes across every surface, including deliberate failure paths. External developers read it as a working, commented reference for each capability.\n\nInstallation requires the developer program entitlement.",
+  "description": "Exercises every surface the Kizen app engine supports: actions, Python automation steps, floating frames, pages, blocks, toolbar items, data adornments, object settings items, calendar sources, route scripts, views, and both setup assistants.\n\nBuilt for two audiences. QA installs it to smoke-test engine changes across every surface, including deliberate failure paths. External developers read it as a working, commented reference for each capability.\n\nInstallation requires the developer program entitlement.",
+  "agentic_description": "Showcases all of the functionality and features of the Kizen app engine.",
   "entry": "src/",
   "engine": "1.0.0",
   "release_notes_directory": "releaseNotes/",

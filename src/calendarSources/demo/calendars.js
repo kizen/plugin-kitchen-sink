@@ -6,7 +6,7 @@
 //   Optional: { description?, default? }  (default pre-selects)
 //
 // Lists every calendar on the google_business service (authorize it first). It's business-level;
-// all users see the same account, and a real plugin usually wants a user-level service. No
+// all users see the same account, and a real app usually wants a user-level service. No
 // nextPageToken paging (fine for a demo).
 
 const [data, errors] = await this.getWithErrors(
