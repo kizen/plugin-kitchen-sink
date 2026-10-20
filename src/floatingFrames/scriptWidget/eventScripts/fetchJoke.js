@@ -1,6 +1,6 @@
 // Kitchen Sink App · Floating Frame · Script Widget · fetchJoke
 //
-// Same dad_jokes contract this plugin's actions and route scripts use: getServiceUrl() resolves
+// Same dad_jokes contract this app's actions and route scripts use: getServiceUrl() resolves
 // the declared service, and getWithErrors() returns a [data, error] tuple instead of throwing
 
 const describeError = (error) =>

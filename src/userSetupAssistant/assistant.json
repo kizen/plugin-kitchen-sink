@@ -10,7 +10,7 @@
     {
       "type": "description",
       "key": "userAssistantIntro",
-      "content": "Unlike the business setup assistant, each user answers this one for **themselves**. The values are user-scoped: scripts read them as `this.userConfig.<key>`, and one user's answers never affect another's. The `google_user` prerequisite above is the user-level OAuth counterpart to the business-level `google_business` service — each user connects their own Google account. (`required` is false here so setup stays completable before OAuth credentials are configured; a real plugin that can't function without the connection would set it to true.)"
+      "content": "Unlike the business setup assistant, each user answers this one for **themselves**. The values are user-scoped: scripts read them as `this.userConfig.<key>`, and one user's answers never affect another's. The `google_user` prerequisite above is the user-level OAuth counterpart to the business-level `google_business` service — each user connects their own Google account. (`required` is false here so setup stays completable before OAuth credentials are configured; a real app that can't function without the connection would set it to true.)"
     },
     {
       "type": "text",

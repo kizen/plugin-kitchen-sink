@@ -1,7 +1,7 @@
 // Kitchen Sink App · Block · Homepage Block
 //
 // `types: ["homepages"]` scopes this block to the Homepage picker. Its point is to show that a
-// block worker can open one of this plugin's views in a modal with `showViewInModal` - the same
+// block worker can open one of this app's views in a modal with `showViewInModal` - the same
 // primitive toolbar items and actions use - and read the submitted form values back. The launch
 // and result handling live in eventScripts/openView.js.
 

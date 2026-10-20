@@ -34,7 +34,7 @@ this.outputUI(`
   <div class="ks-page">
     <header class="ks-hero">
       <h1>Kitchen Sink Page</h1>
-      <p>A routable plugin page rendered with <code>outputUI</code>. The worker has no live DOM, so
+      <p>A routable app page rendered with <code>outputUI</code>. The worker has no live DOM, so
       every button and form below is wired through <code>data-script</code>.</p>
     </header>
 
@@ -66,7 +66,7 @@ this.outputUI(`
     <section class="ks-card">
       <h2>OAuth authorize</h2>
       <p class="ks-muted">Opens the Google authorization flow in a new tab. When the flow
-      completes, that tab lands on the plugin's marketplace Authorization panel, which shows the
+      completes, that tab lands on the app's marketplace Authorization panel, which shows the
       result.</p>
       <button type="button" class="ks-btn" data-script="authorizeGoogle">Authorize Google</button>
     </section>
