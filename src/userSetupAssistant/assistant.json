@@ -34,6 +34,16 @@
       "allow_multiple": true,
       "when": "Boolean({{enableUserCalendars}})",
       "tooltip": "Fetched through the google_user service proxy with your own token — authorize the service above first."
+    },
+    {
+      "type": "radio",
+      "label": "Notification Style",
+      "key": "userNotificationStyle",
+      "default": "compact",
+      "options": [
+        { "label": "Compact", "value": "compact" },
+        { "label": "Detailed", "value": "detailed" }
+      ]
     }
   ]
 }
